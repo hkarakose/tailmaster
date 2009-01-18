@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * User: Halil KARAKOSE
- * Date: 14.Oca.2009
+ * Date: 14.01.2009
  * Time: 11:28:51
  */
 public class TailCommand {

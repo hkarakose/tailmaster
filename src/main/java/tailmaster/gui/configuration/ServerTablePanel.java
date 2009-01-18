@@ -1,13 +1,13 @@
 package tailmaster.gui.configuration;
 
 import tailmaster.gui.configuration.ConfigurationTable;
-import tailmaster.util.Utils;
+import tailmaster.util.JTableUtils;
 
 import javax.swing.*;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 11:30:18
  */
 public class ServerTablePanel extends JPanel {
@@ -21,7 +21,7 @@ public class ServerTablePanel extends JPanel {
     private void initComponents(Object[][] data) {
 
 		String[] columnList = {"Id", "Server Alias", "Host / IP", "Username", "Password"};
-		serverTable = new ConfigurationTable(data, columnList, Utils.getServerTableColumnTypes());
+		serverTable = new ConfigurationTable(data, columnList, JTableUtils.getServerTableColumnTypes());
 
 		serverTable.setColumnSelectionAllowed(true);
 		serverTable.getTableHeader().setReorderingAllowed(false);

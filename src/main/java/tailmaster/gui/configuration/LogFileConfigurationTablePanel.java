@@ -1,13 +1,13 @@
 package tailmaster.gui.configuration;
 
 import tailmaster.gui.configuration.ConfigurationTable;
-import tailmaster.util.Utils;
+import tailmaster.util.JTableUtils;
 
 import javax.swing.*;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 11:30:18
  */
 public class LogFileConfigurationTablePanel extends JPanel {
@@ -20,7 +20,7 @@ public class LogFileConfigurationTablePanel extends JPanel {
 
 	private void initComponents(Object[][] data) {
 		String[] columnList = {"Id", "Log File Alias", "Server", "File Path"};
-		logFileTable = new ConfigurationTable(data, columnList, Utils.getLogFileColumnTypes());
+		logFileTable = new ConfigurationTable(data, columnList, JTableUtils.getLogFileColumnTypes());
 
 		logFileTable.setColumnSelectionAllowed(true);
 		logFileTable.getTableHeader().setReorderingAllowed(false);

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 09:31:49
  */
 public class LogFileDao extends AbstractDao {

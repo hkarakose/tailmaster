@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 10:35:00
  */
 public class ResourceManager {

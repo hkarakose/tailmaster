@@ -2,12 +2,13 @@ package tailmaster.dao;
 
 import tailmaster.model.Server;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 09:31:39
  */
 public class ServerDao extends AbstractDao {
@@ -22,15 +23,36 @@ public class ServerDao extends AbstractDao {
         return instance;
     }
 
-    public ArrayList<Server> findAll() throws SQLException {
-        Statement stmt2 = connection.createStatement();
-        ResultSet rs = stmt2.executeQuery("SELECT * FROM SERVER");
-        ArrayList<Server> serverList = new ArrayList<Server>();
+    public ArrayList<Server> findAll() {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM SERVER");
+			ArrayList<Server> serverList = new ArrayList<Server>();
+			while (rs.next()) {
+				serverList.add(new Server(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+			}
+			return serverList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Unable to retrieve server list", "Error", JOptionPane.ERROR_MESSAGE);
+			return null;
+		}
+    }
 
-        while (rs.next()) {
-            serverList.add(new Server(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
-        }
-        return serverList;
+    public ArrayList<Server> findAllSortedByServerName() {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM SERVER ORDER BY SERVERALIAS ASC");
+			ArrayList<Server> serverList = new ArrayList<Server>();
+			while (rs.next()) {
+				serverList.add(new Server(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+			}
+			return serverList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Unable to retrieve server list", "Error", JOptionPane.ERROR_MESSAGE);
+			return null;
+		}
     }
 
 

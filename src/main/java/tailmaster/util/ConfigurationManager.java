@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 10:31:06
  */
 public class ConfigurationManager {

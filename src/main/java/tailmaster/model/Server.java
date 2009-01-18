@@ -2,7 +2,7 @@ package tailmaster.model;
 
 /**
  * User: Halil KARAKOSE
- * Date: 14.Oca.2009
+ * Date: 14.01.2009
  * Time: 11:30:38
  */
 public class Server {

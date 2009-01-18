@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * User: Halil KARAKOSE
- * Date: 14.Oca.2009
+ * Date: 14.01.2009
  * Time: 12:17:21
  */
 public class LogDisplayPanel extends JPanel {

@@ -2,13 +2,15 @@ package tailmaster.gui.configuration;
 
 import tailmaster.gui.listener.AddServerConfigurationListener;
 import tailmaster.gui.listener.DeleteServerConfigurationListener;
-import tailmaster.util.Utils;
+import tailmaster.util.JTableUtils;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 11:57:07
  */
 public class ServerConfigurationDialog extends JDialog {
@@ -16,10 +18,10 @@ public class ServerConfigurationDialog extends JDialog {
     private JButton updateButton;
     private JButton deleteButton;
     private JPanel buttonPanel;
-    private ServerFormPanel serverFormPanel;
+    private ServerConfigurationForm serverConfigurationForm;
     private ServerTablePanel serverTablePanel;
 
-    public ServerConfigurationDialog(JRootPane rootPane) {
+	public ServerConfigurationDialog(JRootPane rootPane) {
         initComponents();
         setTitle("Server Configuration");
         setModal(true);
@@ -31,9 +33,9 @@ public class ServerConfigurationDialog extends JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        serverTablePanel = new ServerTablePanel(Utils.getServerList());
+        serverTablePanel = new ServerTablePanel(JTableUtils.getServerList());
 
-        serverFormPanel = new ServerFormPanel();
+        serverConfigurationForm = new ServerConfigurationForm();
         buttonPanel = new JPanel();
         saveButton = new JButton();
         updateButton = new JButton();
@@ -53,13 +55,18 @@ public class ServerConfigurationDialog extends JDialog {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        add(serverFormPanel, gridBagConstraints);
+        add(serverConfigurationForm, gridBagConstraints);
 
         saveButton.setText("Save");
-        saveButton.addActionListener(new AddServerConfigurationListener(serverFormPanel, serverTablePanel.getServerTable()));
+        saveButton.addActionListener(new AddServerConfigurationListener(serverConfigurationForm, serverTablePanel.getServerTable()));
         buttonPanel.add(saveButton);
 
         updateButton.setText("Update");
+				updateButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Not implemented.", "Warning", JOptionPane.WARNING_MESSAGE);
+			}
+		});
         buttonPanel.add(updateButton);
 
         deleteButton.setText("Delete");

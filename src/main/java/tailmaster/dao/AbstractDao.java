@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 09:32:58
  */
 public abstract class AbstractDao {

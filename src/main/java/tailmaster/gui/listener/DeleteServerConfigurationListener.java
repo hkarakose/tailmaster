@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 12:56:34
  */
 public class DeleteServerConfigurationListener implements ActionListener {

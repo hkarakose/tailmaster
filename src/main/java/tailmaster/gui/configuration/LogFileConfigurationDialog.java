@@ -1,10 +1,12 @@
 package tailmaster.gui.configuration;
 
-import tailmaster.util.Utils;
+import tailmaster.util.JTableUtils;
 import tailmaster.gui.listener.AddLogFileConfigurationListener;
 import tailmaster.gui.listener.DeleteLogFileConfigurationListener;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * User: Halil KARAKOSE
@@ -32,7 +34,7 @@ public class LogFileConfigurationDialog extends JDialog{
 	private void initComponents() {
 		java.awt.GridBagConstraints gridBagConstraints;
 
-		logFileTablePanel = new LogFileConfigurationTablePanel(Utils.getLogFileList());
+		logFileTablePanel = new LogFileConfigurationTablePanel(JTableUtils.getLogFileList());
 
 		logFileForm = new LogFileConfigurationForm();
 		buttonPanel = new JPanel();
@@ -61,6 +63,11 @@ public class LogFileConfigurationDialog extends JDialog{
 		buttonPanel.add(saveButton);
 
 		updateButton.setText("Update");
+		updateButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Not implemented.", "Warning", JOptionPane.WARNING_MESSAGE);
+			}
+		});
 		buttonPanel.add(updateButton);
 
 		deleteButton.setText("Delete");

@@ -1,9 +1,6 @@
 package tailmaster.gui.configuration;
 
-import tailmaster.util.Utils;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 /**
  * User: Halil KARAKOSE

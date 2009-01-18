@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 
 /**
  * User: Halil KARAKOSE
- * Date: 15.Oca.2009
+ * Date: 15.01.2009
  * Time: 12:19:29
  */
 public class TailMasterMenuBar extends JMenuBar {

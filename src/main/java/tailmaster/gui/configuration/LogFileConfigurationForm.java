@@ -1,7 +1,13 @@
 package tailmaster.gui.configuration;
 
+import tailmaster.dao.ServerDao;
+import tailmaster.model.Server;
+import tailmaster.util.JComboBoxUtils;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * User: Halil KARAKOSE
@@ -12,7 +18,7 @@ public class LogFileConfigurationForm extends JPanel {
 	private JLabel logNameLabel;
 	private JTextField logNameTextField;
 	private JLabel serverIdLabel;
-	private JTextField serverIdTextField;
+	private JComboBox serverIdComboBox;
 	private JLabel filePathLabel;
 	private JTextField filePathTextField;
 
@@ -27,7 +33,8 @@ public class LogFileConfigurationForm extends JPanel {
 		logNameLabel = new JLabel();
 		logNameTextField = new JTextField();
 		serverIdLabel = new JLabel();
-		serverIdTextField = new JTextField();
+		String[] servers = JComboBoxUtils.getServerArray();
+		serverIdComboBox = new JComboBox(servers);
 		filePathLabel = new JLabel();
 		filePathTextField = new JTextField();
 
@@ -59,7 +66,7 @@ public class LogFileConfigurationForm extends JPanel {
 		gridBagConstraints.gridy = 1;
 		gridBagConstraints.weightx = 1.0;
 		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
-		add(serverIdTextField, gridBagConstraints);
+		add(serverIdComboBox, gridBagConstraints);
 
 		filePathLabel.setText("File Path:");
 		gridBagConstraints = new  GridBagConstraints();
@@ -75,13 +82,13 @@ public class LogFileConfigurationForm extends JPanel {
 		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
 		add(filePathTextField, gridBagConstraints);
 	}
-
+	
 	public JTextField getLogNameTextField() {
 		return logNameTextField;
 	}
 
-	public JTextField getServerIdTextField() {
-		return serverIdTextField;
+	public JComboBox getServerIdComboBox() {
+		return serverIdComboBox;
 	}
 
 	public JTextField getFilePathTextField() {

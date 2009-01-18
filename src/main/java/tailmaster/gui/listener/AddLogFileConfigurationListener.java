@@ -3,16 +3,17 @@ package tailmaster.gui.listener;
 import tailmaster.gui.configuration.LogFileConfigurationForm;
 import tailmaster.gui.configuration.ConfigurationTableModel;
 import tailmaster.dao.LogFileDao;
-import tailmaster.model.Server;
+import tailmaster.dao.ServerDao;
 import tailmaster.model.LogFile;
-import tailmaster.util.Utils;
+import tailmaster.model.Server;
+import tailmaster.util.JTableUtils;
+import tailmaster.util.JComboBoxUtils;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * User: Halil KARAKOSE
@@ -32,12 +33,12 @@ public class AddLogFileConfigurationListener implements ActionListener {
 		 LogFileDao serverDao = LogFileDao.getInstance();
         try {
             String name = logFileConfigurationForm.getLogNameTextField().getText();
-            String serverId = logFileConfigurationForm.getServerIdTextField().getText();
+			int serverId = JComboBoxUtils.getSelectedServerId(logFileConfigurationForm.getServerIdComboBox());
             String filePath = logFileConfigurationForm.getFilePathTextField().getText();
-            serverDao.insert(new LogFile(Integer.parseInt(serverId), name, filePath));
+            serverDao.insert(new LogFile(serverId, name, filePath));
 
             ConfigurationTableModel tableModel = (ConfigurationTableModel) logFileTable.getModel();
-            tableModel.setDataVector(Utils.getLogFileList(), Utils.getLogFileColumnTypes());
+            tableModel.setDataVector(JTableUtils.getLogFileList(), JTableUtils.getLogFileColumnTypes());
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(logFileConfigurationForm.getRootPane(), "Unable to save", "Error", JOptionPane.ERROR_MESSAGE);
