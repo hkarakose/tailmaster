@@ -32,20 +32,13 @@ public class JTableUtils {
 
 	public static Object[][] getLogFileList() {
 		LogFileDao dao = LogFileDao.getInstance();
-		try {
-			ArrayList<LogFile> list = dao.findAll();
-			Object[][] objects = new Object[list.size()][5];
-			for (int i = 0; i < list.size(); i++) {
-				LogFile logFile = list.get(i);
-				objects[i] = new String[]{String.valueOf(logFile.getId()), logFile.getAlias(), String.valueOf(logFile.getServerId()), logFile.getFileDestination()};
-			}
-			return objects;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Unable to select server list", "Error", JOptionPane.ERROR);
+		ArrayList<LogFile> list = dao.findAll();
+		Object[][] objects = new Object[list.size()][5];
+		for (int i = 0; i < list.size(); i++) {
+			LogFile logFile = list.get(i);
+			objects[i] = new String[]{String.valueOf(logFile.getId()), logFile.getAlias(), String.valueOf(logFile.getServerId()), logFile.getFileDestination()};
 		}
-
-		return null;
+		return objects;
 	}
 
 	public static Class[] getLogFileColumnTypes() {

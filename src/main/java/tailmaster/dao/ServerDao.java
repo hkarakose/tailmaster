@@ -56,15 +56,20 @@ public class ServerDao extends AbstractDao {
     }
 
 
-    public Server findById(int id) throws SQLException {
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM SERVER WHERE ID = " + id);
-        if (rs.next()) {
-            return new Server(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-        }
-
-        return null;
-    }
+    public Server findById(int id) {
+		Statement stmt = null;
+		try {
+			stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM SERVER WHERE ID = " + id);
+			if (rs.next()) {
+				return new Server(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Unable to get server information with id=" + id, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		return null;
+	}
 
     public int update(Server server, int id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("UPDATE SERVER SET ALIAS=?, HOST=?, USERNAME=?, PASSWORD=? WHERE ID=?");

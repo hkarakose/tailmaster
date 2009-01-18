@@ -2,6 +2,7 @@ package tailmaster.dao;
 
 import tailmaster.model.LogFile;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,15 +26,22 @@ public class LogFileDao extends AbstractDao {
         return instance;
     }
 
-    public ArrayList<LogFile> findAll() throws SQLException {
-        Statement stmt2 = connection.createStatement();
-        ResultSet rs = stmt2.executeQuery("SELECT * FROM LOGFILE");
-        ArrayList<LogFile> serverList = new ArrayList<LogFile>();
+    public ArrayList<LogFile> findAll() {
+		Statement stmt2 = null;
+		try {
+			stmt2 = connection.createStatement();
+			ResultSet rs = stmt2.executeQuery("SELECT * FROM LOGFILE ORDER BY ALIAS ASC");
+			ArrayList<LogFile> serverList = new ArrayList<LogFile>();
 
-        while (rs.next()) {
-            serverList.add(new LogFile(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
-        }
-        return serverList;
+			while (rs.next()) {
+				serverList.add(new LogFile(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
+			}
+			return serverList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Unable to retrieve log file list", "Error", JOptionPane.ERROR_MESSAGE);
+			return null;
+		}
     }
 
 

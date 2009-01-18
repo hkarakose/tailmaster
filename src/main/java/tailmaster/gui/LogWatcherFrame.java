@@ -13,13 +13,19 @@ import java.awt.*;
 public class LogWatcherFrame extends JFrame {
     private JPanel tabbedPaneContainer;
     private JTabbedPane tabbedPane;
+	private static LogWatcherFrame instance;
 
-    public LogWatcherFrame() throws HeadlessException {
+	public static LogWatcherFrame getInstance() {
+		if (instance == null) instance = new LogWatcherFrame();
+		return instance;
+	}
+
+	private LogWatcherFrame() throws HeadlessException {
 		setTitle("TailMaster");
 		setLayout(new BorderLayout());
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
         setJMenuBar(new TailMasterMenuBar());
 
         tabbedPane = new JTabbedPane();
@@ -31,7 +37,7 @@ public class LogWatcherFrame extends JFrame {
         setVisible(true);
 	}
 
-    public JTabbedPane getTabbedPane() {
+	public JTabbedPane getTabbedPane() {
         return tabbedPane;
     }
 }
