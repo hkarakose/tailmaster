@@ -3,8 +3,9 @@ package tailmaster.gui.listener;
 import tailmaster.model.LogFile;
 import tailmaster.model.Server;
 import tailmaster.dao.ServerDao;
-import tailmaster.gui.LogWatcherFrame;
+import tailmaster.gui.TailMasterFrame;
 import tailmaster.gui.LogDisplayPanel;
+import tailmaster.gui.CloseButtonTabbedPane;
 import tailmaster.TailCommand;
 import tailmaster.TailExecutor;
 
@@ -26,8 +27,8 @@ public class DisplayLogFileListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		Server server = ServerDao.getInstance().findById(logFile.getServerId());
-		LogWatcherFrame gui = LogWatcherFrame.getInstance();
-		JTabbedPane tabbedPane = gui.getTabbedPane();
+		TailMasterFrame gui = TailMasterFrame.getInstance();
+		CloseButtonTabbedPane tabbedPane = gui.getTabbedPane();
 
 		LogDisplayPanel slcmJbossTab = new LogDisplayPanel();
 		tabbedPane.addTab(logFile.getAlias(), null, slcmJbossTab, server.getHostname());

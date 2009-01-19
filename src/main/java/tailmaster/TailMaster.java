@@ -1,12 +1,8 @@
 package tailmaster;
 
-import tailmaster.model.LogFile;
-import tailmaster.model.Server;
-import tailmaster.gui.LogDisplayPanel;
-import tailmaster.gui.LogWatcherFrame;
+import tailmaster.gui.TailMasterFrame;
 import tailmaster.util.ConfigurationManager;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -19,6 +15,7 @@ public class TailMaster {
 
 	public static void main(String args[]) throws IOException, SQLException {
         ConfigurationManager.init();
-        LogWatcherFrame gui = LogWatcherFrame.getInstance();
+        TailMasterFrame gui = TailMasterFrame.getInstance();
+		gui.setVisible(true);
 	}
 }

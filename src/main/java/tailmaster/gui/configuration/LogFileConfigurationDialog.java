@@ -28,7 +28,6 @@ public class LogFileConfigurationDialog extends JDialog{
         setModal(true);
         setSize(350,500);
         setLocationRelativeTo(rootPane);
-        setVisible(true);
 	}
 
 	private void initComponents() {

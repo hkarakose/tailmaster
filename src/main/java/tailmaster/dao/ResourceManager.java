@@ -15,6 +15,7 @@ public class ResourceManager {
         try {
             return DriverManager.getConnection(strUrl);
         } catch (SQLException e) {
+			e.printStackTrace();
             throw new RuntimeException("Unable to connect embedded database.");
         }
     }

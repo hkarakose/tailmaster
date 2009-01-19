@@ -10,17 +10,17 @@ import java.awt.*;
  * Date: Jan 14, 2009
  * Time: 4:35:13 PM
  */
-public class LogWatcherFrame extends JFrame {
+public class TailMasterFrame extends JFrame {
     private JPanel tabbedPaneContainer;
-    private JTabbedPane tabbedPane;
-	private static LogWatcherFrame instance;
+    private CloseButtonTabbedPane tabbedPane;
+	private static TailMasterFrame instance;
 
-	public static LogWatcherFrame getInstance() {
-		if (instance == null) instance = new LogWatcherFrame();
+	public static TailMasterFrame getInstance() {
+		if (instance == null) instance = new TailMasterFrame();
 		return instance;
 	}
 
-	private LogWatcherFrame() throws HeadlessException {
+	private TailMasterFrame() throws HeadlessException {
 		setTitle("TailMaster");
 		setLayout(new BorderLayout());
 		setSize(800, 600);
@@ -28,16 +28,14 @@ public class LogWatcherFrame extends JFrame {
 
         setJMenuBar(new TailMasterMenuBar());
 
-        tabbedPane = new JTabbedPane();
+        tabbedPane = new CloseButtonTabbedPane();
 		tabbedPaneContainer = new JPanel(new BorderLayout());
         tabbedPaneContainer.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
         tabbedPaneContainer.add(tabbedPane, SwingConstants.CENTER);
         add(tabbedPaneContainer, SwingConstants.CENTER);
-
-        setVisible(true);
 	}
 
-	public JTabbedPane getTabbedPane() {
+	public CloseButtonTabbedPane getTabbedPane() {
         return tabbedPane;
     }
 }

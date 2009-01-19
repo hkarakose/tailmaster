@@ -41,7 +41,8 @@ public class TailMasterMenuBar extends JMenuBar {
         addLogFileMenuItem = new JMenuItem("Configure Log Files");
 		addLogFileMenuItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				LogFileConfigurationDialog dialog = new LogFileConfigurationDialog(me.getRootPane()); 
+				LogFileConfigurationDialog dialog = new LogFileConfigurationDialog(me.getRootPane());
+				dialog.setVisible(true);
 			}
 		});
         file.add(addLogFileMenuItem);
