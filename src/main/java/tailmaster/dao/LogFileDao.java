@@ -30,11 +30,11 @@ public class LogFileDao extends AbstractDao {
 		Statement stmt2 = null;
 		try {
 			stmt2 = connection.createStatement();
-			ResultSet rs = stmt2.executeQuery("SELECT * FROM LOGFILE ORDER BY ALIAS ASC");
+			ResultSet rs = stmt2.executeQuery("SELECT ID, SERVERID, ALIAS, FILELOCATIONTYPE, FILEDESTINATION FROM LOGFILE ORDER BY ALIAS ASC");
 			ArrayList<LogFile> serverList = new ArrayList<LogFile>();
 
 			while (rs.next()) {
-				serverList.add(new LogFile(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
+				serverList.add( new LogFile(rs.getInt(1), rs.getInt(4), rs.getInt(2), rs.getString(3), rs.getString(5)) );
 			}
 			return serverList;
 		} catch (SQLException e) {
@@ -74,13 +74,14 @@ public class LogFileDao extends AbstractDao {
         return statement.executeUpdate();
     }
 
-    public void insert(LogFile server) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO LOGFILE(SERVERID, ALIAS, FILEDESTINATION) values (?,?,?)");
+    public void insert(LogFile logFile) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO LOGFILE(SERVERID, ALIAS, FILELOCATIONTYPE, FILEDESTINATION) values (?,?,?,?)");
 
         int i = 1;
-        statement.setInt(i++, server.getServerId());
-        statement.setString(i++, server.getAlias());
-        statement.setString(i++, server.getFileDestination());
+        statement.setInt(i++, logFile.getServerId());
+        statement.setString(i++, logFile.getAlias());
+        statement.setInt(i++, logFile.getLocationType());
+        statement.setString(i++, logFile.getFileDestination());
         statement.executeUpdate();
     }
 }

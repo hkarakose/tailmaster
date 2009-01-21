@@ -8,15 +8,15 @@ import java.io.IOException;
  * Time: 9:02:38 AM
  */
 public class TailExecutor extends Thread{
-	private TailCommand command;
+	private Command command;
 
-	public TailExecutor(TailCommand command) {
+	public TailExecutor(Command command) {
 		this.command = command;
 	}
 
 	public void run() {
 		try {
-			command.executeTail();
+			command.executeCommand();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

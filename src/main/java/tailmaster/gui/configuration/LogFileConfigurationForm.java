@@ -1,13 +1,10 @@
 package tailmaster.gui.configuration;
 
-import tailmaster.dao.ServerDao;
-import tailmaster.model.Server;
 import tailmaster.util.JComboBoxUtils;
+import tailmaster.model.LocationType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * User: Halil KARAKOSE
@@ -17,6 +14,8 @@ import java.util.HashMap;
 public class LogFileConfigurationForm extends JPanel {
 	private JLabel logNameLabel;
 	private JTextField logNameTextField;
+	private JLabel locationLabel;
+	private JComboBox locationComboBox;
 	private JLabel serverIdLabel;
 	private JComboBox serverIdComboBox;
 	private JLabel filePathLabel;
@@ -32,6 +31,8 @@ public class LogFileConfigurationForm extends JPanel {
 
 		logNameLabel = new JLabel();
 		logNameTextField = new JTextField();
+		locationLabel = new JLabel();
+		locationComboBox = getLocationTypeComboBoxItems();
 		serverIdLabel = new JLabel();
 		String[] servers = JComboBoxUtils.getServerArray();
 		serverIdComboBox = new JComboBox(servers);
@@ -54,16 +55,30 @@ public class LogFileConfigurationForm extends JPanel {
 		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
 		add(logNameTextField, gridBagConstraints);
 
-		serverIdLabel.setText("Server:");
+		locationLabel.setText("File Location:");
 		gridBagConstraints = new  GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
+		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		add(locationLabel, gridBagConstraints);
+		gridBagConstraints = new  GridBagConstraints();
+		gridBagConstraints.fill =  GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		add(locationComboBox, gridBagConstraints);
+
+		serverIdLabel.setText("Server:");
+		gridBagConstraints = new  GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
 		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
 		add(serverIdLabel, gridBagConstraints);
 		gridBagConstraints = new  GridBagConstraints();
 		gridBagConstraints.fill =  GridBagConstraints.HORIZONTAL;
 		gridBagConstraints.gridx = 1;
-		gridBagConstraints.gridy = 1;
+		gridBagConstraints.gridy = 2;
 		gridBagConstraints.weightx = 1.0;
 		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
 		add(serverIdComboBox, gridBagConstraints);
@@ -71,20 +86,32 @@ public class LogFileConfigurationForm extends JPanel {
 		filePathLabel.setText("File Path:");
 		gridBagConstraints = new  GridBagConstraints();
 		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridy = 3;
 		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
 		add(filePathLabel, gridBagConstraints);
 		gridBagConstraints = new  GridBagConstraints();
 		gridBagConstraints.gridx = 1;
-		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridy = 3;
 		gridBagConstraints.fill =  GridBagConstraints.HORIZONTAL;
 		gridBagConstraints.weightx = 1.0;
 		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
 		add(filePathTextField, gridBagConstraints);
 	}
-	
+
+	private JComboBox getLocationTypeComboBoxItems() {
+		JComboBox comboBox = new JComboBox();
+		for (LocationType type : LocationType.values()) {
+			comboBox.addItem(type.name());
+		}
+		return comboBox;
+	}
+
 	public JTextField getLogNameTextField() {
 		return logNameTextField;
+	}
+
+	public JComboBox getLocationComboBox() {
+		return locationComboBox;
 	}
 
 	public JComboBox getServerIdComboBox() {

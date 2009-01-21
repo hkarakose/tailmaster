@@ -20,7 +20,7 @@ public class ConfigurationManager {
         // Decide on the db system directory: <userhome>/.addressbook/
         String userHomeDir = System.getProperty("user.home", ".");
         String seperator = "\\";
-        String systemDir = userHomeDir + seperator + ".addressbook";
+        String systemDir = userHomeDir + seperator + "." + Constants.PROGRAM_NAME;
         System.out.println("systemDir = " + systemDir);
 
         // Set the db system directory.
@@ -35,23 +35,20 @@ public class ConfigurationManager {
         try {
             statement = connection.createStatement();
             String serverCreate = "CREATE table SERVER(" +
-                    "    ID          INTEGER NOT NULL " +
-                    "                PRIMARY KEY GENERATED ALWAYS AS IDENTITY " +
-                    "                (START WITH 1, INCREMENT BY 1)," +
-                    "    SERVERALIAS    VARCHAR(30), " +
-                    "    HOST    VARCHAR(30), " +
-                    "    USERNAME   VARCHAR(30)," +
-                    "    PASSWORD  VARCHAR(30))";
+                    "ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
+                    "SERVERALIAS VARCHAR(30), " +
+                    "HOST VARCHAR(30), " +
+                    "USERNAME VARCHAR(30) NOT NULL, " +
+                    "PASSWORD VARCHAR(30) NOT NULL)";
 
             statement.execute(serverCreate);
 
             String logFileCreate = "CREATE table LOGFILE(" +
-                    "    ID          INTEGER NOT NULL " +
-                    "                PRIMARY KEY GENERATED ALWAYS AS IDENTITY " +
-                    "                (START WITH 1, INCREMENT BY 1)," +
-                    "    SERVERID INTEGER NOT NULL, " +
-                    "    ALIAS    VARCHAR(30), " +
-                    "    FILEDESTINATION    VARCHAR(30))";
+                    "ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
+                    "SERVERID INTEGER NOT NULL, " +
+                    "ALIAS VARCHAR(30) NOT NULL, " +
+                    "FILELOCATIONTYPE INTEGER NOT NULL, " +
+                    "FILEDESTINATION VARCHAR(30) NOT NULL)";
 
             statement.execute(logFileCreate);
             bCreatedTables = true;

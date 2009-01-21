@@ -23,10 +23,10 @@ public class DeleteLogFileConfigurationListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		int selectedRow = table.getSelectedRow();
-		String serverId = (String) table.getModel().getValueAt(selectedRow, 0);
+		String logFileId = (String) table.getModel().getValueAt(selectedRow, 0);
 		LogFileDao dao = LogFileDao.getInstance();
 		try {
-			dao.delete(Integer.parseInt(serverId));
+			dao.delete(Integer.parseInt(logFileId));
 			DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 			tableModel.removeRow(selectedRow);
 		} catch (SQLException e1) {
