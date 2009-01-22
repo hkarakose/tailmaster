@@ -5,6 +5,8 @@ import tailmaster.model.LocationType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 /**
  * User: Halil KARAKOSE
@@ -103,6 +105,16 @@ public class LogFileConfigurationForm extends JPanel {
 		for (LocationType type : LocationType.values()) {
 			comboBox.addItem(type.name());
 		}
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				String selectedItem = (String) e.getItem();
+				if (LocationType.valueOf(selectedItem) == LocationType.LOCAL) {
+					serverIdComboBox.setEnabled(false);
+				} else {
+					serverIdComboBox.setEnabled(true);
+				}
+			}
+		});
 		return comboBox;
 	}
 
