@@ -10,6 +10,7 @@ import tailmaster.gui.CloseButtonTabbedPane;
 import tailmaster.RemoteTailCommand;
 import tailmaster.TailExecutor;
 import tailmaster.LocalTailCommand;
+import tailmaster.util.Constants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,16 +29,20 @@ public class DisplayLogFileListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		Server server = ServerDao.getInstance().findById(logFile.getServerId());
+
 		TailMasterFrame gui = TailMasterFrame.getInstance();
 		CloseButtonTabbedPane tabbedPane = gui.getTabbedPane();
 
 		LogDisplayPanel slcmJbossTab = new LogDisplayPanel();
-		tabbedPane.addTab(logFile.getAlias(), null, slcmJbossTab, server.getHostname());
 		if (LocationType.REMOTE.getLocationTypeId() == logFile.getLocationType()) {
+			tabbedPane.addTab(logFile.getAlias(), null, slcmJbossTab, server.getHostname());
+			tabbedPane.setSelectedComponent(slcmJbossTab);
 			RemoteTailCommand command = new RemoteTailCommand(server, logFile, slcmJbossTab.getLogTextArea());
 			TailExecutor tailExecutor = new TailExecutor(command);
 			tailExecutor.start();
 		} else {
+			tabbedPane.addTab(logFile.getAlias(), null, slcmJbossTab, logFile.getFileDestination());
+			tabbedPane.setSelectedComponent(slcmJbossTab);
 			LocalTailCommand localTailCommand = new LocalTailCommand(logFile, slcmJbossTab.getLogTextArea());
 			TailExecutor tailExecutor = new TailExecutor(localTailCommand);
 			tailExecutor.start();
