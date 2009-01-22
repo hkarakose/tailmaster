@@ -86,6 +86,11 @@ public class TailMasterMenuBar extends JMenuBar {
         help = new JMenu("Help");
         help.setMnemonic('H');
         aboutMenuItem = new JMenuItem("About");
+        aboutMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Developed by Halil Karakose, 2009\nEmail: halilkarakose@gmail.com");
+			}
+		});
         help.add(aboutMenuItem);
 
         add(help);
