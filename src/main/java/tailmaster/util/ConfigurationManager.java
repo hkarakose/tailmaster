@@ -36,19 +36,19 @@ public class ConfigurationManager {
             statement = connection.createStatement();
             String serverCreate = "CREATE table SERVER(" +
                     "ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
-                    "SERVERALIAS VARCHAR(30), " +
-                    "HOST VARCHAR(30), " +
-                    "USERNAME VARCHAR(30) NOT NULL, " +
-                    "PASSWORD VARCHAR(30) NOT NULL)";
+                    "SERVERALIAS VARCHAR(50), " +
+                    "HOST VARCHAR(50), " +
+                    "USERNAME VARCHAR(50) NOT NULL, " +
+                    "PASSWORD VARCHAR(50) NOT NULL)";
 
             statement.execute(serverCreate);
 
             String logFileCreate = "CREATE table LOGFILE(" +
                     "ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
                     "SERVERID INTEGER NOT NULL, " +
-                    "ALIAS VARCHAR(30) NOT NULL, " +
+                    "ALIAS VARCHAR(50) NOT NULL, " +
                     "FILELOCATIONTYPE INTEGER NOT NULL, " +
-                    "FILEDESTINATION VARCHAR(30) NOT NULL)";
+                    "FILEDESTINATION VARCHAR(100) NOT NULL)";
 
             statement.execute(logFileCreate);
             bCreatedTables = true;
