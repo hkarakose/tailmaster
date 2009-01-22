@@ -5,6 +5,7 @@ import tailmaster.gui.configuration.LogFileConfigurationDialog;
 import tailmaster.gui.listener.DisplayLogFileListener;
 import tailmaster.dao.LogFileDao;
 import tailmaster.model.LogFile;
+import tailmaster.util.ConfigurationManager;
 
 import javax.swing.*;
 import javax.swing.event.MenuListener;
@@ -34,6 +35,7 @@ public class TailMasterMenuBar extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ServerConfigurationDialog dialog = new ServerConfigurationDialog(me.getRootPane());
+				dialog.setVisible(true);
             }
         });
         file.add(addServerMenuItem);
