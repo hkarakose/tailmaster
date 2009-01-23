@@ -41,62 +41,63 @@ public class LogFileConfigurationForm extends JPanel {
 		filePathLabel = new JLabel();
 		filePathTextField = new JTextField();
 
-		setLayout(new  GridBagLayout());
+		setLayout(new GridBagLayout());
 
 		logNameLabel.setText("Log Alias:");
-		gridBagConstraints = new  GridBagConstraints();
+		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.ipadx = 2;
 		gridBagConstraints.ipady = 2;
-		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(logNameLabel, gridBagConstraints);
-		gridBagConstraints = new  GridBagConstraints();
-		gridBagConstraints.fill =  GridBagConstraints.HORIZONTAL;
+		gridBagConstraints = new GridBagConstraints();
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 		gridBagConstraints.ipadx = 2;
 		gridBagConstraints.ipady = 2;
 		gridBagConstraints.weightx = 1.0;
-		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(logNameTextField, gridBagConstraints);
 
 		locationLabel.setText("File Location:");
-		gridBagConstraints = new  GridBagConstraints();
+		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
-		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(locationLabel, gridBagConstraints);
-		gridBagConstraints = new  GridBagConstraints();
-		gridBagConstraints.fill =  GridBagConstraints.HORIZONTAL;
+		gridBagConstraints = new GridBagConstraints();
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 1;
 		gridBagConstraints.weightx = 1.0;
-		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(locationComboBox, gridBagConstraints);
 
 		serverIdLabel.setText("Server:");
-		gridBagConstraints = new  GridBagConstraints();
+		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
-		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(serverIdLabel, gridBagConstraints);
-		gridBagConstraints = new  GridBagConstraints();
-		gridBagConstraints.fill =  GridBagConstraints.HORIZONTAL;
+		gridBagConstraints = new GridBagConstraints();
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 2;
 		gridBagConstraints.weightx = 1.0;
-		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
+		displayServerIdComboBoxIfAvailable();
 		add(serverIdComboBox, gridBagConstraints);
 
 		filePathLabel.setText("File Path:");
-		gridBagConstraints = new  GridBagConstraints();
+		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 3;
-		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(filePathLabel, gridBagConstraints);
-		gridBagConstraints = new  GridBagConstraints();
+		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 3;
-		gridBagConstraints.fill =  GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 		gridBagConstraints.weightx = 1.0;
-		gridBagConstraints.insets = new  Insets(2, 2, 2, 2);
+		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(filePathTextField, gridBagConstraints);
 	}
 
@@ -107,15 +108,20 @@ public class LogFileConfigurationForm extends JPanel {
 		}
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				String selectedItem = (String) e.getItem();
-				if (LocationType.valueOf(selectedItem) == LocationType.LOCAL) {
-					serverIdComboBox.setEnabled(false);
-				} else {
-					serverIdComboBox.setEnabled(true);
-				}
+				displayServerIdComboBoxIfAvailable();
 			}
+
 		});
 		return comboBox;
+	}
+
+	private void displayServerIdComboBoxIfAvailable() {
+		String selectedItem = (String) locationComboBox.getSelectedItem();
+		if (LocationType.valueOf(selectedItem) == LocationType.LOCAL) {
+			serverIdComboBox.setEnabled(false);
+		} else {
+			serverIdComboBox.setEnabled(true);
+		}
 	}
 
 	public JTextField getLogNameTextField() {
