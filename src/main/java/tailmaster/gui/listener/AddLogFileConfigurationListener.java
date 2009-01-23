@@ -33,7 +33,7 @@ public class AddLogFileConfigurationListener implements ActionListener {
             String name = logFileConfigurationForm.getLogNameTextField().getText();
 			String locationTypeStr = (String) logFileConfigurationForm.getLocationComboBox().getSelectedItem();
 			LocationType locationType = LocationType.valueOf(locationTypeStr);
-			int serverId = JComboBoxUtils.getSelectedServerId(logFileConfigurationForm.getServerIdComboBox());
+			int serverId = findServerId(locationType);
             String filePath = logFileConfigurationForm.getFilePathTextField().getText();
             serverDao.insert(new LogFile(locationType.getLocationTypeId(), serverId, name, filePath));
 
@@ -43,5 +43,13 @@ public class AddLogFileConfigurationListener implements ActionListener {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(logFileConfigurationForm.getRootPane(), "Unable to save", "Error", JOptionPane.ERROR_MESSAGE);
         }
+	}
+
+	private int findServerId(LocationType locationType) {
+		if (locationType == LocationType.REMOTE) {
+			 return JComboBoxUtils.getSelectedServerId(logFileConfigurationForm.getServerIdComboBox());
+		} else {
+			return 0; //the file is in the local computer, there is no need for a server info.
+		}
 	}
 }
