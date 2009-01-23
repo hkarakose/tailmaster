@@ -12,13 +12,14 @@ import java.io.IOException;
 public abstract class TailCommand implements Command{
 	protected void appendToTextArea(BufferedInputStream bufferedReader, JTextArea logTextArea) throws IOException {
 		int length = 0;
-		byte[] byteBuffer = new byte[255];
+		byte[] byteBuffer = new byte[1024];
 		while ((length = bufferedReader.available()) >= 0) {
 			if (isDataAvailable(length)) continue;
 
 			length = length > byteBuffer.length ? byteBuffer.length : length;
 			bufferedReader.read(byteBuffer, 0, length);
 			logTextArea.append(new String(byteBuffer, 0, length));
+			logTextArea.setCaretPosition(logTextArea.getText().length());
 		}
 	}
 
