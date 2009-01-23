@@ -10,7 +10,6 @@ import tailmaster.gui.CloseButtonTabbedPane;
 import tailmaster.RemoteTailCommand;
 import tailmaster.TailExecutor;
 import tailmaster.LocalTailCommand;
-import tailmaster.util.Constants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -46,8 +45,6 @@ public class DisplayLogFileListener implements ActionListener {
 			LocalTailCommand localTailCommand = new LocalTailCommand(logFile, slcmJbossTab.getLogTextArea());
 			TailExecutor tailExecutor = new TailExecutor(localTailCommand);
 			tailExecutor.start();
-			System.out.println("start tail command here");
-
 		}
 	}
 }
