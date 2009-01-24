@@ -5,7 +5,6 @@ import tailmaster.gui.configuration.LogFileConfigurationDialog;
 import tailmaster.gui.listener.DisplayLogFileListener;
 import tailmaster.dao.LogFileDao;
 import tailmaster.model.LogFile;
-import tailmaster.util.ConfigurationManager;
 
 import javax.swing.*;
 import javax.swing.event.MenuListener;
@@ -56,7 +55,8 @@ public class TailMasterMenuBar extends JMenuBar {
         exitMenuItem.addActionListener(new ActionListener() {
             //@Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+//				SessionRegistry.disconnect();
+				System.exit(0);
             }
         });
         file.add(exitMenuItem);

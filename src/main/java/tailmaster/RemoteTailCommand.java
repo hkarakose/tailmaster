@@ -7,7 +7,6 @@ import com.sshtools.j2ssh.transport.IgnoreHostKeyVerification;
 import com.sshtools.j2ssh.connection.ChannelOutputStream;
 import com.sshtools.j2ssh.connection.ChannelInputStream;
 import com.sshtools.j2ssh.session.SessionChannelClient;
-import com.sshtools.j2ssh.session.PseudoTerminal;
 import com.sshtools.j2ssh.authentication.PasswordAuthenticationClient;
 import com.sshtools.j2ssh.authentication.AuthenticationProtocolState;
 
@@ -63,16 +62,24 @@ public class RemoteTailCommand extends TailCommand {
 		}
 
 		SessionChannelClient ssh = sshClient.openSessionChannel();
-//		ssh.requestPseudoTerminal("vt100", 80, 24, 400, 300, ""); //Supports VT100, VT220, VT320 and ANSI Emulations
-		ssh.startShell();
-//		ssh.executeCommand("tail -f " + logFile.getFileDestination());
+//		ChannelEventListener listener = (ChannelEventListener) new SessionOutputReader(ssh);
+//		ssh.addEventListener(listener);
+		ssh.requestPseudoTerminal("vt100", 80, 24, 0, 0, ""); //VT100, VT220, VT320 and ANSI Emulations
+		//ssh.startShell();
+		SessionRegistry.add(ssh);
+		SessionRegistry.add(sshClient);
 		ChannelOutputStream out = ssh.getOutputStream();
-		String cmd = "tail -f " + logFile.getFileDestination() + "\n";
-		out.write(cmd.getBytes());
+		String cmd = "tail -f " + logFile.getFileDestination();
+//		out.write(cmd.getBytes());
 
 		ChannelInputStream inputStream = ssh.getInputStream();
-
 		BufferedInputStream bufferedStream = new BufferedInputStream(inputStream);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		ssh.executeCommand("tail -123f " + logFile.getFileDestination());
 		appendToTextArea(bufferedStream, textArea);
 	}
 }
