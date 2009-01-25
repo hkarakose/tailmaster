@@ -34,9 +34,10 @@ public class DisplayLogFileListener implements ActionListener {
 
 		LogDisplayPanel slcmJbossTab = new LogDisplayPanel();
 		if (LocationType.REMOTE.getLocationTypeId() == logFile.getLocationType()) {
-			tabbedPane.addTab(logFile.getAlias(), null, slcmJbossTab, server.getHostname());
+            long connectionId = System.currentTimeMillis();
+			tabbedPane.addTab(connectionId, logFile.getAlias(), null, slcmJbossTab, server.getHostname());
 			tabbedPane.setSelectedComponent(slcmJbossTab);
-			RemoteTailCommand command = new RemoteTailCommand(server, logFile, slcmJbossTab.getLogTextArea());
+			RemoteTailCommand command = new RemoteTailCommand(connectionId, server, logFile, slcmJbossTab.getLogTextArea());
 			TailExecutor tailExecutor = new TailExecutor(command);
 			tailExecutor.start();
 		} else {

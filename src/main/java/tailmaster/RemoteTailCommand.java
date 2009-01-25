@@ -24,8 +24,10 @@ public class RemoteTailCommand extends TailCommand {
 	private LogFile logFile;
 	private JTextArea textArea;
 	private SshClient sshClient;
+    private long connectionId;
 
-	public RemoteTailCommand(Server server, LogFile logFile, JTextArea textArea) {
+    public RemoteTailCommand(long connectionId, Server server, LogFile logFile, JTextArea textArea) {
+        this.connectionId = connectionId;
 		this.server = server;
 		this.logFile = logFile;
 		this.textArea = textArea;
@@ -66,9 +68,8 @@ public class RemoteTailCommand extends TailCommand {
 //		ssh.addEventListener(listener);
 		sshChannel.requestPseudoTerminal("vt100", 80, 24, 0, 0, ""); //VT100, VT220, VT320 and ANSI Emulations
 		//ssh.startShell();
-        long connectionId = System.currentTimeMillis();
-        SessionRegistry.add(connectionId, sshChannel);
-		SessionRegistry.add(connectionId, sshClient);
+        SessionRegistry.put(connectionId, sshChannel);
+		SessionRegistry.put(connectionId, sshClient);
 		ChannelOutputStream out = sshChannel.getOutputStream();
 		String cmd = "tail -f " + logFile.getFileDestination();
 //		out.write(cmd.getBytes());
