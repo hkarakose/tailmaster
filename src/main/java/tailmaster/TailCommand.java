@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public abstract class TailCommand implements Command{
 	protected void appendToTextArea(BufferedInputStream bufferedReader, JTextArea logTextArea) throws IOException {
-		int length = 0;
+		int length;
 		byte[] byteBuffer = new byte[1024];
 		while ((length = bufferedReader.available()) >= 0) {
 			if (isDataAvailable(length)) continue;
