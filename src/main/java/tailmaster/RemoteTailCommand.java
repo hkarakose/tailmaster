@@ -61,25 +61,26 @@ public class RemoteTailCommand extends TailCommand {
 				break;
 		}
 
-		SessionChannelClient ssh = sshClient.openSessionChannel();
+		SessionChannelClient sshChannel = sshClient.openSessionChannel();
 //		ChannelEventListener listener = (ChannelEventListener) new SessionOutputReader(ssh);
 //		ssh.addEventListener(listener);
-		ssh.requestPseudoTerminal("vt100", 80, 24, 0, 0, ""); //VT100, VT220, VT320 and ANSI Emulations
+		sshChannel.requestPseudoTerminal("vt100", 80, 24, 0, 0, ""); //VT100, VT220, VT320 and ANSI Emulations
 		//ssh.startShell();
-		SessionRegistry.add(ssh);
-		SessionRegistry.add(sshClient);
-		ChannelOutputStream out = ssh.getOutputStream();
+        long connectionId = System.currentTimeMillis();
+        SessionRegistry.add(connectionId, sshChannel);
+		SessionRegistry.add(connectionId, sshClient);
+		ChannelOutputStream out = sshChannel.getOutputStream();
 		String cmd = "tail -f " + logFile.getFileDestination();
 //		out.write(cmd.getBytes());
 
-		ChannelInputStream inputStream = ssh.getInputStream();
+		ChannelInputStream inputStream = sshChannel.getInputStream();
 		BufferedInputStream bufferedStream = new BufferedInputStream(inputStream);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		ssh.executeCommand("tail -123f " + logFile.getFileDestination());
+		sshChannel.executeCommand("tail -123f " + logFile.getFileDestination());
 		appendToTextArea(bufferedStream, textArea);
 	}
 }

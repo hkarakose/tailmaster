@@ -3,7 +3,7 @@ package tailmaster;
 import com.sshtools.j2ssh.session.SessionChannelClient;
 import com.sshtools.j2ssh.SshClient;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.io.IOException;
 
 /**
@@ -12,36 +12,36 @@ import java.io.IOException;
  * Time: 9:06:07 PM
  */
 public class SessionRegistry {
-	private static ArrayList<SessionChannelClient> sessionChannelClients = new ArrayList<SessionChannelClient>();
-	private static ArrayList<SshClient> sshClients = new ArrayList<SshClient>();
+    private static HashMap<Long, SessionChannelClient> sessionChannelMap = new HashMap<Long, SessionChannelClient>();
+    private static HashMap<Long, SshClient> sshClientMap = new HashMap<Long, SshClient>();
 
-	public static void add(SessionChannelClient ssh) {
-		sessionChannelClients.add(ssh);
-	}
+    public static void add(long connectionId, SessionChannelClient ssh) {
+        sessionChannelMap.put(connectionId, ssh);
+    }
 
-	public static ArrayList<SessionChannelClient> getSessionChannelClients() {
-		return sessionChannelClients;
-	}
+    public static HashMap<Long, SessionChannelClient> getSessionChannelMap() {
+        return sessionChannelMap;
+    }
 
-	public static void add(SshClient sshClient) {
-		sshClients.add(sshClient);
-	}
+    public static void add(long connectionId, SshClient sshClient) {
+        sshClientMap.put(connectionId, sshClient);
+    }
 
-	public static ArrayList<SshClient> getSshClients() {
-		return sshClients;
-	}
+    public static HashMap<Long, SshClient> getSshClientMap() {
+        return sshClientMap;
+    }
 
-	public static void disconnect() {
-		for (SessionChannelClient sessionChannelClient : sessionChannelClients) {
-			try {
-				sessionChannelClient.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
-
-		for (SshClient sshClient : sshClients) {
-			sshClient.disconnect();
-		}
-	}
+    public static void disconnect() {
+        Set<Long> connectionIdSet = sessionChannelMap.keySet();
+        for (Long connectionId : connectionIdSet) {
+            SessionChannelClient sessionChannel = sessionChannelMap.get(connectionId);
+            SshClient client = sshClientMap.get(connectionId);
+            try {
+                sessionChannel.close();
+                client.disconnect();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
 }
