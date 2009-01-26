@@ -1,7 +1,9 @@
-package tailmaster;
+package tailmaster.command;
 
 import tailmaster.model.Server;
 import tailmaster.model.LogFile;
+import tailmaster.command.TailCommand;
+import tailmaster.SessionRegistry;
 import com.sshtools.j2ssh.SshClient;
 import com.sshtools.j2ssh.transport.IgnoreHostKeyVerification;
 import com.sshtools.j2ssh.connection.ChannelOutputStream;

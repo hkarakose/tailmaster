@@ -1,4 +1,4 @@
-package tailmaster;
+package tailmaster.command;
 
 import java.io.IOException;
 

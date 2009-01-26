@@ -1,18 +1,17 @@
-package tailmaster;
+package tailmaster.command;
 
 import tailmaster.model.LogFile;
+import tailmaster.command.TailCommand;
 
 import javax.swing.*;
 import java.io.*;
-import java.nio.CharBuffer;
-import java.nio.ByteOrder;
 
 /**
  * User: Halil KARAKOSE
  * Date: Jan 21, 2009
  * Time: 2:59:05 PM
  */
-public class LocalTailCommand extends TailCommand{
+public class LocalTailCommand extends TailCommand {
 	private LogFile logFile;
 	private JTextArea logTextArea;
 

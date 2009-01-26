@@ -1,4 +1,6 @@
-package tailmaster;
+package tailmaster.command;
+
+import tailmaster.command.Command;
 
 import javax.swing.*;
 import java.io.BufferedInputStream;
@@ -9,7 +11,7 @@ import java.io.IOException;
  * Date: Jan 22, 2009
  * Time: 8:25:57 AM
  */
-public abstract class TailCommand implements Command{
+public abstract class TailCommand implements Command {
 	protected void appendToTextArea(BufferedInputStream bufferedReader, JTextArea logTextArea) throws IOException {
 		int length;
 		byte[] byteBuffer = new byte[1024];
