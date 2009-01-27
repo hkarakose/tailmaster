@@ -1,7 +1,7 @@
 package tailmaster.util;
 
-import tailmaster.model.Server;
 import tailmaster.dao.ServerDao;
+import tailmaster.model.Server;
 
 import javax.swing.*;
 import java.util.ArrayList;

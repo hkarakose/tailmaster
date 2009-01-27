@@ -1,13 +1,11 @@
 package tailmaster.util;
 
-import tailmaster.dao.ServerDao;
 import tailmaster.dao.LogFileDao;
-import tailmaster.model.Server;
+import tailmaster.dao.ServerDao;
 import tailmaster.model.LogFile;
+import tailmaster.model.Server;
 
-import javax.swing.*;
 import java.util.ArrayList;
-import java.sql.SQLException;
 
 /**
  * User: Halil KARAKOSE

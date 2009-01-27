@@ -1,7 +1,7 @@
 package tailmaster.util;
 
 import tailmaster.dao.ResourceManager;
-import tailmaster.TailMaster;
+import tailmaster.gui.TailMasterFrame;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -69,7 +69,7 @@ public class ConfigurationManager {
 			bCreatedTables = true;
 		} catch (SQLException ex) {
 			if (!ex.getSQLState().equalsIgnoreCase("X0Y32")) {
-				JOptionPane.showMessageDialog(TailMaster.getGUI(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(TailMasterFrame.getInstance(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				throw ex;
 			} else {
 				//table already exists, no need to do anything
