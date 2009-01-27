@@ -7,9 +7,9 @@ import tailmaster.dao.ServerDao;
 import tailmaster.gui.TailMasterFrame;
 import tailmaster.gui.LogDisplayPanel;
 import tailmaster.gui.CloseButtonTabbedPane;
-import tailmaster.RemoteTailCommand;
+import tailmaster.command.RemoteTailCommand;
 import tailmaster.TailExecutor;
-import tailmaster.LocalTailCommand;
+import tailmaster.command.LocalTailCommand;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

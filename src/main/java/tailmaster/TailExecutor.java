@@ -1,5 +1,7 @@
 package tailmaster;
 
+import tailmaster.command.Command;
+
 import java.io.IOException;
 
 /**
