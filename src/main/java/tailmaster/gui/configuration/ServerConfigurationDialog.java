@@ -3,6 +3,7 @@ package tailmaster.gui.configuration;
 import tailmaster.gui.listener.AddServerConfigurationListener;
 import tailmaster.gui.listener.DeleteServerConfigurationListener;
 import tailmaster.util.JTableUtils;
+import tailmaster.commons.gui.ClosableJDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -13,7 +14,7 @@ import java.awt.event.ActionEvent;
  * Date: 15.01.2009
  * Time: 11:57:07
  */
-public class ServerConfigurationDialog extends JDialog {
+public class ServerConfigurationDialog extends ClosableJDialog {
     private JButton saveButton;
     private JButton updateButton;
     private JButton deleteButton;
@@ -22,9 +23,8 @@ public class ServerConfigurationDialog extends JDialog {
     private ServerTablePanel serverTablePanel;
 
 	public ServerConfigurationDialog(JRootPane rootPane) {
+		super((JFrame) rootPane.getParent(), "Server Configuration", true);
         initComponents();
-        setTitle("Server Configuration");
-        setModal(true);
         setSize(350,500);
         setLocationRelativeTo(rootPane);
     }

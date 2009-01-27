@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 /**
  * User: Halil KARAKOSE
@@ -99,6 +101,19 @@ public class LogFileConfigurationForm extends JPanel {
 		gridBagConstraints.weightx = 1.0;
 		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(filePathTextField, gridBagConstraints);
+		filePathTextField.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {
+				System.out.println("LogFileConfigurationForm.keyTyped");
+			}
+
+			public void keyPressed(KeyEvent e) {
+				System.out.println("LogFileConfigurationForm.keyPressed");
+			}
+
+			public void keyReleased(KeyEvent e) {
+				System.out.println("LogFileConfigurationForm.keyReleased");
+			}
+		});
 	}
 
 	private JComboBox getLocationTypeComboBoxItems() {
