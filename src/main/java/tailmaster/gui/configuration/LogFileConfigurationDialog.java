@@ -3,17 +3,19 @@ package tailmaster.gui.configuration;
 import tailmaster.util.JTableUtils;
 import tailmaster.gui.listener.AddLogFileConfigurationListener;
 import tailmaster.gui.listener.DeleteLogFileConfigurationListener;
+import tailmaster.commons.gui.ClosableJDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.*;
 
 /**
  * User: Halil KARAKOSE
  * Date: Jan 16, 2009
  * Time: 10:37:19 AM
  */
-public class LogFileConfigurationDialog extends JDialog{
+public class LogFileConfigurationDialog extends ClosableJDialog {
 	private JButton saveButton;
 	private JButton updateButton;
 	private JButton deleteButton;
@@ -21,17 +23,15 @@ public class LogFileConfigurationDialog extends JDialog{
 	private LogFileConfigurationForm logFileForm;
 	private LogFileConfigurationTablePanel logFileTablePanel;
 
-
 	public LogFileConfigurationDialog(JRootPane rootPane) {
+		super((JFrame) rootPane.getParent(), "Log File Configuration", true);
 		initComponents();
-		setTitle("Log File Configuration");
-        setModal(true);
-        setSize(350,500);
-        setLocationRelativeTo(rootPane);
+		setSize(400, 500);
+		setLocationRelativeTo(rootPane);
 	}
 
 	private void initComponents() {
-		java.awt.GridBagConstraints gridBagConstraints;
+		GridBagConstraints gridBagConstraints;
 
 		logFileTablePanel = new LogFileConfigurationTablePanel(JTableUtils.getLogFileList());
 
@@ -41,20 +41,20 @@ public class LogFileConfigurationDialog extends JDialog{
 		updateButton = new JButton();
 		deleteButton = new JButton();
 
-		setLayout(new java.awt.GridBagLayout());
-		gridBagConstraints = new java.awt.GridBagConstraints();
+		setLayout(new GridBagLayout());
+		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
-		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+		gridBagConstraints.fill = GridBagConstraints.BOTH;
+		gridBagConstraints.anchor = GridBagConstraints.NORTH;
 		gridBagConstraints.weightx = 1.0;
 		gridBagConstraints.weighty = 1.0;
 		add(logFileTablePanel, gridBagConstraints);
-		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
-		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.anchor = GridBagConstraints.WEST;
 		add(logFileForm, gridBagConstraints);
 
 		saveButton.setText("Save");
@@ -62,7 +62,7 @@ public class LogFileConfigurationDialog extends JDialog{
 		buttonPanel.add(saveButton);
 
 		updateButton.setText("Update");
-		updateButton.addActionListener(new ActionListener(){
+		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Not implemented.", "Warning", JOptionPane.WARNING_MESSAGE);
 			}
@@ -74,10 +74,10 @@ public class LogFileConfigurationDialog extends JDialog{
 		deleteButton.addActionListener(new DeleteLogFileConfigurationListener(logFileTable));
 		buttonPanel.add(deleteButton);
 
-		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints = new GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
-		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 		add(buttonPanel, gridBagConstraints);
 	}
 }
