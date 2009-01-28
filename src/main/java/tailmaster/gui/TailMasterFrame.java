@@ -1,8 +1,12 @@
 package tailmaster.gui;
 
 import tailmaster.gui.menu.TailMasterMenuBar;
+import tailmaster.TabRegistry;
+import tailmaster.model.TabData;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -17,6 +21,7 @@ import java.io.File;
  * Time: 4:35:13 PM
  */
 public class TailMasterFrame extends JFrame {
+    private JToolBar toolBar;
 	private JPanel tabbedPaneContainer;
 	private CloseButtonTabbedPane tabbedPane;
 	private static TailMasterFrame instance;
@@ -39,7 +44,7 @@ public class TailMasterFrame extends JFrame {
 
 		setJMenuBar(new TailMasterMenuBar());
 
-		JToolBar toolBar = initializeToolBar();
+		toolBar = new TailMasterToolBar();
 		add(toolBar, BorderLayout.PAGE_START);
 
 		tabbedPane = new CloseButtonTabbedPane();
@@ -49,27 +54,11 @@ public class TailMasterFrame extends JFrame {
 		add(tabbedPaneContainer, SwingConstants.CENTER);
 	}
 
-	private JToolBar initializeToolBar() {
-		JToolBar bar = new JToolBar("Still draggable");
-		JButton pauseButton = new JButton("Pause");
-		pauseButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CloseButtonTabbedPane tabbedPane1 = getTabbedPane();
-				Component[] tabs = tabbedPane1.getComponents();
-				for (Component tab : tabs) {
-					if (tab instanceof LogDisplayPanel && tab.isShowing()) {
-						System.out.println(tab + " is visible");
-						LogDisplayPanel panel = (LogDisplayPanel) tab;
-						panel.setPlaying(!panel.isPlaying());
-					}
-				}
-			}
-		});
-		bar.add(pauseButton);
-	    return bar;
-	}
+    public JToolBar getToolBar() {
+        return toolBar;
+    }
 
-	public CloseButtonTabbedPane getTabbedPane() {
+    public CloseButtonTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
 	protected static Image createFDImage() {

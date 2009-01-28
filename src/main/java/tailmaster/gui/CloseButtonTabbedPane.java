@@ -1,6 +1,7 @@
 package tailmaster.gui;
 
 import tailmaster.SessionRegistry;
+import tailmaster.TabRegistry;
 
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalIconFactory;
@@ -41,7 +42,7 @@ public class CloseButtonTabbedPane extends JTabbedPane {
     public class CloseButtonTab extends JPanel {
         private Component tab;
 
-        public CloseButtonTab(final long connectionId, final Component tab, String title, Icon icon) {
+        public CloseButtonTab(final long connectionId, Component tab, String title, Icon icon) {
             this.tab = tab;
             setOpaque(false);
             FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 3, 3);
@@ -57,8 +58,12 @@ public class CloseButtonTabbedPane extends JTabbedPane {
             button.addMouseListener(new MouseListener() {
                 public void mouseClicked(MouseEvent e) {
                     SessionRegistry.disconnect(connectionId);
-                    JTabbedPane tabbedPane = (JTabbedPane) getParent().getParent();
-                    tabbedPane.remove(tab);
+                    JButton button = (JButton) e.getSource();
+                    CloseButtonTab buttonTab = (CloseButtonTab) button.getParent();
+                    LogDisplayPanel panel = (LogDisplayPanel) buttonTab.getTab();
+                    TabRegistry.INSTANCE.removeTab(panel.getPanelId());
+                    JTabbedPane tabbedPane = (JTabbedPane) panel.getParent();
+                    tabbedPane.remove(panel);
                 }
 
                 public void mousePressed(MouseEvent e) {
@@ -78,6 +83,10 @@ public class CloseButtonTabbedPane extends JTabbedPane {
                 }
             });
             add(button);
+        }
+
+        public Component getTab() {
+            return tab;
         }
     }
 }

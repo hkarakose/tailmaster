@@ -8,4 +8,6 @@ package tailmaster.util;
 public class Constants {
 	public static final String TAIL_THREADS = "TAIL_THREADS";
 	public static final String PROGRAM_NAME = "tailmaster";
+    public static final String PAUSE = "Pause";
+    public static final String PLAY = "Play";
 }

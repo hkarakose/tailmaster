@@ -1,10 +1,15 @@
 package tailmaster.gui;
 
+import tailmaster.TabRegistry;
+import tailmaster.model.TabData;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ComponentEvent;
 
 /**
  * User: Halil KARAKOSE
@@ -13,14 +18,37 @@ import java.awt.event.MouseEvent;
  */
 public class LogDisplayPanel extends JPanel {
     private JTextArea logTextArea;
-	private JScrollPane scroller;
-	private boolean playing;
+    private JScrollPane scroller;
+    private long panelId;
 
-	public LogDisplayPanel() {
+    public LogDisplayPanel() {
         setLayout(new BorderLayout());
-        setBorder(new EmptyBorder(1,1,1,1));
-		setPlaying(true);
-		
+        setBorder(new EmptyBorder(1, 1, 1, 1));
+        setPanelId(System.currentTimeMillis());
+        TabRegistry.INSTANCE.addTab(getPanelId(), new TabData(panelId));
+
+        addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+                LogDisplayPanel panel = (LogDisplayPanel) e.getComponent();
+                boolean playing = TabRegistry.INSTANCE.getTabData(panel.getPanelId()).isPlaying();
+                TailMasterToolBar toolBar = (TailMasterToolBar) TailMasterFrame.getInstance().getToolBar();
+                toolBar.togglePauseButtonText(playing);
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+            }
+        });
+
         logTextArea = new JTextArea();
         logTextArea.setEditable(false);
         logTextArea.setFont(new Font("Courier New", Font.PLAIN, 12));
@@ -39,15 +67,15 @@ public class LogDisplayPanel extends JPanel {
         return scroller;
     }
 
-	public void setPlaying(boolean playing) {
-		this.playing = playing;
-	}
+    public long getPanelId() {
+        return panelId;
+    }
 
-	public boolean isPlaying() {
-		return playing;
-	}
+    public void setPanelId(long panelId) {
+        this.panelId = panelId;
+    }
 
-	private static class LogTextAreaMouseMotionListener implements MouseListener {
+    private static class LogTextAreaMouseMotionListener implements MouseListener {
 
         public void mouseMoved(MouseEvent e) {
             //http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Cursor.html
