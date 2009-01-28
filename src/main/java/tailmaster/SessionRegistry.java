@@ -41,18 +41,4 @@ public class SessionRegistry {
             e.printStackTrace();
         }
     }
-
-    public static void disconnect() {
-        Set<Long> connectionIdSet = sshChannelMap.keySet();
-        for (Long connectionId : connectionIdSet) {
-            SessionChannelClient sessionChannel = sshChannelMap.get(connectionId);
-            SshClient client = connectionMap.get(connectionId);
-            try {
-                sessionChannel.close();
-                client.disconnect();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
 }
