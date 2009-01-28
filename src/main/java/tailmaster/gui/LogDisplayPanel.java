@@ -14,11 +14,13 @@ import java.awt.event.MouseEvent;
 public class LogDisplayPanel extends JPanel {
     private JTextArea logTextArea;
 	private JScrollPane scroller;
+	private boolean playing;
 
-    public LogDisplayPanel() {
+	public LogDisplayPanel() {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(1,1,1,1));
-
+		setPlaying(true);
+		
         logTextArea = new JTextArea();
         logTextArea.setEditable(false);
         logTextArea.setFont(new Font("Courier New", Font.PLAIN, 12));
@@ -37,7 +39,15 @@ public class LogDisplayPanel extends JPanel {
         return scroller;
     }
 
-    private static class LogTextAreaMouseMotionListener implements MouseListener {
+	public void setPlaying(boolean playing) {
+		this.playing = playing;
+	}
+
+	public boolean isPlaying() {
+		return playing;
+	}
+
+	private static class LogTextAreaMouseMotionListener implements MouseListener {
 
         public void mouseMoved(MouseEvent e) {
             //http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Cursor.html

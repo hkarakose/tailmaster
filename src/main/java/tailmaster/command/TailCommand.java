@@ -1,10 +1,12 @@
 package tailmaster.command;
 
 import tailmaster.command.Command;
+import tailmaster.gui.LogDisplayPanel;
 
 import javax.swing.*;
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.awt.*;
 
 /**
  * User: Halil KARAKOSE
@@ -14,9 +16,10 @@ import java.io.IOException;
 public abstract class TailCommand implements Command {
 	protected void appendToTextArea(BufferedInputStream bufferedReader, JTextArea logTextArea) throws IOException {
 		int length;
-		byte[] byteBuffer = new byte[1024];
+		byte[] byteBuffer = new byte[2048];
 		while ((length = bufferedReader.available()) >= 0) {
-			if (isDataAvailable(length)) continue;
+			if (isDataAvailable(length) && !isPlaying(logTextArea))
+				continue;
 
 			length = length > byteBuffer.length ? byteBuffer.length : length;
 			bufferedReader.read(byteBuffer, 0, length);
@@ -25,9 +28,17 @@ public abstract class TailCommand implements Command {
 		}
 	}
 
+	private boolean isPlaying(JTextArea textArea) {
+		Container parent = textArea.getParent().getParent().getParent();
+		if (parent instanceof LogDisplayPanel)
+			return ((LogDisplayPanel)parent).isPlaying();
+		else
+			throw new RuntimeException("Illegal parent: " + parent);
+	}
+
 	private boolean isDataAvailable(int length) {
 		if (length == 0) {
-			sleep(1000);
+			sleep(5000);
 			return true;
 		}
 		return false;

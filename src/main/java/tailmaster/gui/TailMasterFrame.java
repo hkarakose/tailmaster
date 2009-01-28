@@ -4,6 +4,8 @@ import tailmaster.gui.menu.TailMasterMenuBar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.net.MalformedURLException;
@@ -37,11 +39,34 @@ public class TailMasterFrame extends JFrame {
 
 		setJMenuBar(new TailMasterMenuBar());
 
+		JToolBar toolBar = initializeToolBar();
+		add(toolBar, BorderLayout.PAGE_START);
+
 		tabbedPane = new CloseButtonTabbedPane();
 		tabbedPaneContainer = new JPanel(new BorderLayout());
 		tabbedPaneContainer.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		tabbedPaneContainer.add(tabbedPane, SwingConstants.CENTER);
 		add(tabbedPaneContainer, SwingConstants.CENTER);
+	}
+
+	private JToolBar initializeToolBar() {
+		JToolBar bar = new JToolBar("Still draggable");
+		JButton pauseButton = new JButton("Pause");
+		pauseButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CloseButtonTabbedPane tabbedPane1 = getTabbedPane();
+				Component[] tabs = tabbedPane1.getComponents();
+				for (Component tab : tabs) {
+					if (tab instanceof LogDisplayPanel && tab.isShowing()) {
+						System.out.println(tab + " is visible");
+						LogDisplayPanel panel = (LogDisplayPanel) tab;
+						panel.setPlaying(!panel.isPlaying());
+					}
+				}
+			}
+		});
+		bar.add(pauseButton);
+	    return bar;
 	}
 
 	public CloseButtonTabbedPane getTabbedPane() {

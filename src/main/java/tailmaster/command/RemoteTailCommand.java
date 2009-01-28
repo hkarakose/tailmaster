@@ -46,6 +46,7 @@ public class RemoteTailCommand extends TailCommand {
 	public void executeCommand() throws IOException {
 		sshClient = new SshClient();
 		//TODO catch "java.net.ConnectException: Connection timed out: connect"
+		//TODO catch "java.net.SocketException: Network is unreachable: connect"
 		sshClient.connect(server.getHostname(), new IgnoreHostKeyVerification());
 
 		PasswordAuthenticationClient auth = new PasswordAuthenticationClient();
@@ -73,7 +74,7 @@ public class RemoteTailCommand extends TailCommand {
         SessionRegistry.put(connectionId, sshChannel);
 		SessionRegistry.put(connectionId, sshClient);
 		ChannelOutputStream out = sshChannel.getOutputStream();
-		String cmd = "tail -f " + logFile.getFileDestination();
+//		String cmd = "tail -f " + logFile.getFileDestination();
 //		out.write(cmd.getBytes());
 
 		ChannelInputStream inputStream = sshChannel.getInputStream();
