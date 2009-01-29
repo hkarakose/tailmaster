@@ -6,7 +6,7 @@ import tailmaster.model.LocationType;
 import tailmaster.dao.ServerDao;
 import tailmaster.gui.TailMasterFrame;
 import tailmaster.gui.LogDisplayPanel;
-import tailmaster.gui.CloseButtonTabbedPane;
+import tailmaster.commons.gui.CloseButtonTabbedPane;
 import tailmaster.command.RemoteTailCommand;
 import tailmaster.TailExecutor;
 import tailmaster.command.LocalTailCommand;

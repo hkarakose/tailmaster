@@ -1,19 +1,11 @@
 package tailmaster.gui;
 
 import tailmaster.gui.menu.TailMasterMenuBar;
-import tailmaster.TabRegistry;
-import tailmaster.model.TabData;
+import tailmaster.commons.gui.CloseButtonTabbedPane;
 
 import javax.swing.*;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.io.File;
 
 /**
  * User: Halil KARAKOSE

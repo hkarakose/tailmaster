@@ -2,7 +2,7 @@ package tailmaster.gui;
 
 import tailmaster.model.TabData;
 import tailmaster.TabRegistry;
-import static tailmaster.util.Constants.*;
+import tailmaster.commons.gui.CloseButtonTabbedPane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,11 +16,19 @@ import java.awt.event.ActionEvent;
  */
 public class TailMasterToolBar extends JToolBar {
     private JButton pauseButton;
+	private ImageIcon pauseIcon;
+	private ImageIcon playIcon;
 
     public TailMasterToolBar() {
-        pauseButton = new JButton(PAUSE);
-        pauseButton.addActionListener(new PauseButtonListener());
-        add(pauseButton);
+		pauseIcon = new ImageIcon((getClass().getClassLoader().getResource("media_pause.png")));
+		pauseIcon = new ImageIcon(pauseIcon.getImage().getScaledInstance(24,24, Image.SCALE_FAST));
+        pauseButton = new JButton(pauseIcon);
+		pauseButton.setMargin(new Insets(0,0,0,0));
+		pauseButton.addActionListener(new PauseButtonListener());
+		add(pauseButton);
+
+		playIcon = new ImageIcon(getClass().getClassLoader().getResource("media_play.png"));
+		playIcon = new ImageIcon(playIcon.getImage().getScaledInstance(24,24, Image.SCALE_DEFAULT));
     }
 
     public JButton getPauseButton() {
@@ -43,6 +51,6 @@ public class TailMasterToolBar extends JToolBar {
     }
 
     public void togglePauseButtonText(boolean playing) {
-        pauseButton.setText(playing ? PAUSE : PLAY);
+        pauseButton.setIcon(playing ? pauseIcon : playIcon);
     }
 }
