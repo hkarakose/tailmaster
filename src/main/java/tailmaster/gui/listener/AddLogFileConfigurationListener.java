@@ -38,7 +38,7 @@ public class AddLogFileConfigurationListener implements ActionListener {
             logFileDao.insert(new LogFile(locationType.getLocationTypeId(), serverId, name, filePath));
 
             ConfigurationTableModel tableModel = (ConfigurationTableModel) logFileTable.getModel();
-            tableModel.setDataVector(JTableUtils.getLogFileList(), JTableUtils.getLogFileColumnTypes());
+            tableModel.setDataVector(JTableUtils.getLogFileList(), JTableUtils.getLogFileColumnHeaders());
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(logFileConfigurationForm.getRootPane(), "Unable to save", "Error", JOptionPane.ERROR_MESSAGE);

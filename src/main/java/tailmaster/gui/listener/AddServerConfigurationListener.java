@@ -37,7 +37,7 @@ public class AddServerConfigurationListener implements ActionListener {
             serverDao.insert(new Server(alias, host, username, password));
 
             DefaultTableModel tableModel = (DefaultTableModel) serverTable.getModel();
-            tableModel.setDataVector(JTableUtils.getServerList(), JTableUtils.getServerTableColumnTypes());
+            tableModel.setDataVector(JTableUtils.getServerList(), JTableUtils.getServerColumnHeaders());
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(serverConfigurationForm.getRootPane(), "Unable to save", "Error", JOptionPane.ERROR_MESSAGE);
