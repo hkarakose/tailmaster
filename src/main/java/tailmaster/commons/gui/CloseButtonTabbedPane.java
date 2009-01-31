@@ -1,7 +1,8 @@
-package tailmaster.gui;
+package tailmaster.commons.gui;
 
 import tailmaster.SessionRegistry;
 import tailmaster.TabRegistry;
+import tailmaster.gui.LogDisplayPanel;
 
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalIconFactory;
