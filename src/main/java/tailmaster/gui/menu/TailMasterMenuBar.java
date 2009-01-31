@@ -67,7 +67,7 @@ public class TailMasterMenuBar extends JMenuBar {
 			public void menuSelected(MenuEvent e) {
 				view.removeAll();
 				
-				ArrayList<LogFile> logFileList = LogFileDao.getInstance().findAll();
+				ArrayList<LogFile> logFileList = LogFileDao.getInstance().findAllSortedByLogName();
 				for (LogFile logFile : logFileList) {
 					JMenuItem menuItem = new JMenuItem(logFile.getAlias() + " (" + logFile.getFileDestination() + ")");
 					menuItem.addActionListener(new DisplayLogFileListener(logFile));

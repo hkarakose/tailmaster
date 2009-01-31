@@ -15,11 +15,11 @@ import java.util.ArrayList;
 public class JTableUtils {
 	public static Object[][] getServerList() {
 		ServerDao dao = ServerDao.getInstance();
-		ArrayList<Server> list = dao.findAll();
+		ArrayList<Server> list = dao.findAllSortedByServerName();
 		Object[][] objects = new Object[list.size()][5];
 		for (int i = 0; i < list.size(); i++) {
 			Server server = list.get(i);
-			objects[i] = new String[]{String.valueOf(server.getId()), server.getServerAlias(), server.getHostname(), server.getUsername(), server.getPassword()};
+			objects[i] = new String[]{String.valueOf(i+1), server.getServerAlias(), server.getHostname(), server.getUsername(), server.getPassword()};
 		}
 		return objects;
 	}
@@ -28,13 +28,17 @@ public class JTableUtils {
 		return new Class[]{String.class, String.class, String.class, String.class, String.class};
 	}
 
+    public static String[] getServerColumnHeaders() {
+        return new String[]{"Id", "Server Alias", "Host / IP", "Username", "Password"};
+    }
+
 	public static Object[][] getLogFileList() {
 		LogFileDao dao = LogFileDao.getInstance();
-		ArrayList<LogFile> list = dao.findAll();
+		ArrayList<LogFile> list = dao.findAllSortedByLogName();
 		Object[][] objects = new Object[list.size()][5];
 		for (int i = 0; i < list.size(); i++) {
 			LogFile logFile = list.get(i);
-			objects[i] = new String[]{String.valueOf(logFile.getId()), logFile.getAlias(), String.valueOf(logFile.getServerId()), logFile.getFileDestination()};
+			objects[i] = new String[]{String.valueOf(i+1), logFile.getAlias(), String.valueOf(logFile.getServerId()), logFile.getFileDestination()};
 		}
 		return objects;
 	}
@@ -42,4 +46,9 @@ public class JTableUtils {
 	public static Class[] getLogFileColumnTypes() {
 		return new Class[]{String.class, String.class, String.class, String.class};
 	}
+
+    public static String[] getLogFileColumnHeaders() {
+        String[] columnList = {"Id", "Log File Alias", "Server", "File Path"};
+        return columnList;
+    }
 }

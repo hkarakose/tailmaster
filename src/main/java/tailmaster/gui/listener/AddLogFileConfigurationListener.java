@@ -28,14 +28,14 @@ public class AddLogFileConfigurationListener implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		 LogFileDao serverDao = LogFileDao.getInstance();
+		 LogFileDao logFileDao = LogFileDao.getInstance();
         try {
             String name = logFileConfigurationForm.getLogNameTextField().getText();
 			String locationTypeStr = (String) logFileConfigurationForm.getLocationComboBox().getSelectedItem();
 			LocationType locationType = LocationType.valueOf(locationTypeStr);
 			int serverId = findServerId(locationType);
             String filePath = logFileConfigurationForm.getFilePathTextField().getText();
-            serverDao.insert(new LogFile(locationType.getLocationTypeId(), serverId, name, filePath));
+            logFileDao.insert(new LogFile(locationType.getLocationTypeId(), serverId, name, filePath));
 
             ConfigurationTableModel tableModel = (ConfigurationTableModel) logFileTable.getModel();
             tableModel.setDataVector(JTableUtils.getLogFileList(), JTableUtils.getLogFileColumnTypes());

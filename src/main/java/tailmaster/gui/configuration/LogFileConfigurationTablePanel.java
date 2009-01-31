@@ -19,8 +19,8 @@ public class LogFileConfigurationTablePanel extends JPanel {
 	}
 
 	private void initComponents(Object[][] data) {
-		String[] columnList = {"Id", "Log File Alias", "Server", "File Path"};
-		logFileTable = new ConfigurationTable(data, columnList, JTableUtils.getLogFileColumnTypes());
+        String[] columnList = JTableUtils.getLogFileColumnHeaders();
+        logFileTable = new ConfigurationTable(data, columnList, JTableUtils.getLogFileColumnTypes());
 
 		logFileTable.setColumnSelectionAllowed(true);
 		logFileTable.getTableHeader().setReorderingAllowed(false);
@@ -37,7 +37,7 @@ public class LogFileConfigurationTablePanel extends JPanel {
 		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(logFileTableScroller, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE));
 	}
 
-	public JTable getLogFileTable() {
+    public JTable getLogFileTable() {
 		return logFileTable;
 	}
 }

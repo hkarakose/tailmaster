@@ -26,7 +26,7 @@ public class LogFileDao extends AbstractDao {
         return instance;
     }
 
-    public ArrayList<LogFile> findAll() {
+    public ArrayList<LogFile> findAllSortedByLogName() {
 		Statement stmt2 = null;
 		try {
 			stmt2 = connection.createStatement();

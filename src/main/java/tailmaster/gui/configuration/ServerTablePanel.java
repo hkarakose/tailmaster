@@ -19,9 +19,8 @@ public class ServerTablePanel extends JPanel {
     }
 
     private void initComponents(Object[][] data) {
-
-		String[] columnList = {"Id", "Server Alias", "Host / IP", "Username", "Password"};
-		serverTable = new ConfigurationTable(data, columnList, JTableUtils.getServerTableColumnTypes());
+        String[] columnList = JTableUtils.getServerColumnHeaders();
+        serverTable = new ConfigurationTable(data, columnList, JTableUtils.getServerTableColumnTypes());
 
 		serverTable.setColumnSelectionAllowed(true);
 		serverTable.getTableHeader().setReorderingAllowed(false);
