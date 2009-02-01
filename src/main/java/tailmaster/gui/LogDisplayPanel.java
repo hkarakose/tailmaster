@@ -52,6 +52,9 @@ public class LogDisplayPanel extends JPanel {
         logTextArea = new JTextArea();
         logTextArea.setEditable(false);
         logTextArea.setFont(new Font("Courier New", Font.PLAIN, 12));
+		logTextArea.setLineWrap(true);
+		logTextArea.setWrapStyleWord(true);
+		logTextArea.getCaret().setVisible(true);
         logTextArea.addMouseListener(new LogTextAreaMouseMotionListener());
 
         scroller = new JScrollPane(logTextArea);
