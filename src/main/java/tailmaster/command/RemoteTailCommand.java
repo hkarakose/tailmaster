@@ -24,15 +24,15 @@ import java.io.BufferedInputStream;
 public class RemoteTailCommand extends TailCommand {
 	private Server server;
 	private LogFile logFile;
-	private JTextArea textArea;
+	private JEditorPane editorPane;
 	private SshClient sshClient;
     private long connectionId;
 
-    public RemoteTailCommand(long connectionId, Server server, LogFile logFile, JTextArea textArea) {
+	public RemoteTailCommand(long connectionId, Server server, LogFile logFile, JEditorPane editorPane) {
         this.connectionId = connectionId;
 		this.server = server;
 		this.logFile = logFile;
-		this.textArea = textArea;
+		this.editorPane = editorPane;
 	}
 
 	public Server getServer() {
@@ -78,13 +78,11 @@ public class RemoteTailCommand extends TailCommand {
 //		out.write(cmd.getBytes());
 
 		ChannelInputStream inputStream = sshChannel.getInputStream();
+
+		ChannelOutputStream channelOutputStream = sshChannel.getOutputStream();
+
 		BufferedInputStream bufferedStream = new BufferedInputStream(inputStream);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		sshChannel.executeCommand("tail -123f " + logFile.getFileDestination());
-		appendToTextArea(bufferedStream, textArea);
+		appendToTextArea(bufferedStream, editorPane);
 	}
 }

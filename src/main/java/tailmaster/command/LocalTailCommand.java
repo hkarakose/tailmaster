@@ -13,16 +13,16 @@ import java.io.*;
  */
 public class LocalTailCommand extends TailCommand {
 	private LogFile logFile;
-	private JTextArea logTextArea;
+	private JEditorPane editorPane;
 
-	public LocalTailCommand(LogFile logFile, JTextArea logTextArea) {
+	public LocalTailCommand(LogFile logFile, JEditorPane editorPane) {
 		this.logFile = logFile;
-		this.logTextArea = logTextArea;
+		this.editorPane = editorPane;
 	}
 
 	public void executeCommand() throws IOException {
 		FileInputStream fileReader = new FileInputStream(logFile.getFileDestination());
 		BufferedInputStream bufferedReader = new BufferedInputStream(fileReader);
-		appendToTextArea(bufferedReader, logTextArea);
+		appendToTextArea(bufferedReader, editorPane);
 	}
 }

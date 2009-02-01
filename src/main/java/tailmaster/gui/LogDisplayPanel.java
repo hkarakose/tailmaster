@@ -17,11 +17,11 @@ import java.awt.event.ComponentEvent;
  * Time: 12:17:21
  */
 public class LogDisplayPanel extends JPanel {
-    private JTextArea logTextArea;
+    private JEditorPane editorPane;
     private JScrollPane scroller;
     private long panelId;
 
-    public LogDisplayPanel() {
+	public LogDisplayPanel() {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(1, 1, 1, 1));
         setPanelId(System.currentTimeMillis());
@@ -49,18 +49,19 @@ public class LogDisplayPanel extends JPanel {
             }
         });
 
-        logTextArea = new JTextArea();
-        logTextArea.setEditable(false);
-        logTextArea.setFont(new Font("Courier New", Font.PLAIN, 12));
-        logTextArea.addMouseListener(new LogTextAreaMouseMotionListener());
+        editorPane = new JEditorPane();
+        editorPane.setFont(new Font("Courier New", Font.PLAIN, 12));
+		editorPane.getCaret().setVisible(true);
+		editorPane.setEditable(false);
+		editorPane.addMouseListener(new LogTextAreaMouseMotionListener());
 
-        scroller = new JScrollPane(logTextArea);
+        scroller = new JScrollPane(editorPane);
         scroller.setAutoscrolls(true);
         add(scroller);
     }
 
-    public JTextArea getLogTextArea() {
-        return logTextArea;
+    public JEditorPane getEditorPane() {
+        return editorPane;
     }
 
     public JScrollPane getScroller() {
@@ -75,7 +76,7 @@ public class LogDisplayPanel extends JPanel {
         this.panelId = panelId;
     }
 
-    private static class LogTextAreaMouseMotionListener implements MouseListener {
+	private static class LogTextAreaMouseMotionListener implements MouseListener {
 
         public void mouseMoved(MouseEvent e) {
             //http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Cursor.html
@@ -93,7 +94,7 @@ public class LogDisplayPanel extends JPanel {
         }
 
         public void mouseEntered(MouseEvent e) {
-            JTextArea textArea = (JTextArea) e.getComponent();
+            JEditorPane textArea = (JEditorPane) e.getComponent();
             textArea.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
         }
 
