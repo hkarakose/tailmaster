@@ -37,13 +37,13 @@ public class DisplayLogFileListener implements ActionListener {
             long connectionId = System.currentTimeMillis();
 			tabbedPane.addTab(connectionId, logFile.getAlias(), null, slcmJbossTab, server.getHostname());
 			tabbedPane.setSelectedComponent(slcmJbossTab);
-			RemoteTailCommand command = new RemoteTailCommand(connectionId, server, logFile, slcmJbossTab.getEditorPane());
+			RemoteTailCommand command = new RemoteTailCommand(connectionId, server, logFile, slcmJbossTab.getLogTextArea());
 			TailExecutor tailExecutor = new TailExecutor(command);
 			tailExecutor.start();
 		} else {
 			tabbedPane.addTab(logFile.getAlias(), null, slcmJbossTab, logFile.getFileDestination());
 			tabbedPane.setSelectedComponent(slcmJbossTab);
-			LocalTailCommand localTailCommand = new LocalTailCommand(logFile, slcmJbossTab.getEditorPane());
+			LocalTailCommand localTailCommand = new LocalTailCommand(logFile, slcmJbossTab.getLogTextArea());
 			TailExecutor tailExecutor = new TailExecutor(localTailCommand);
 			tailExecutor.start();
 		}
