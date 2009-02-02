@@ -20,16 +20,20 @@ public class ConfigurationManager {
 	}
 
 	private static void setDBSystemDir() {
-		// Decide on the db system directory: <userhome>/.addressbook/
-		String userHomeDir = System.getProperty("user.home", ".");
-		String seperator = "\\";
-		String systemDir = userHomeDir + seperator + "." + Constants.PROGRAM_NAME;
+        String systemDir = getConfigurationDirectory();
 
-		// Set the db system directory.
+		// Set the db system directory. this is needed for Apache Derby to work properly
 		System.setProperty("derby.system.home", systemDir);
 	}
 
-	private static boolean createTablesIfNecessary() throws SQLException {
+    private static String getConfigurationDirectory() {
+        String userHomeDir = System.getProperty("user.home", ".");
+        String seperator = "\\";
+        String systemDir = userHomeDir + seperator + "." + Constants.PROGRAM_NAME;
+        return systemDir;
+    }
+
+    private static boolean createTablesIfNecessary() throws SQLException {
 		System.out.println("creating tables if necessary");
 		boolean bCreatedTables = false;
 		Connection connection = ResourceManager.getConnection();
