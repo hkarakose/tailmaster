@@ -26,7 +26,7 @@ public class ConfigurationManager {
 		System.setProperty("derby.system.home", systemDir);
 	}
 
-    private static String getConfigurationDirectory() {
+    public static String getConfigurationDirectory() {
         String userHomeDir = System.getProperty("user.home", ".");
         String seperator = "\\";
         String systemDir = userHomeDir + seperator + "." + Constants.PROGRAM_NAME;
