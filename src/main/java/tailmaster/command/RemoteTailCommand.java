@@ -59,11 +59,6 @@ public class RemoteTailCommand extends TailCommand {
 
 		ChannelInputStream inputStream = sshChannel.getInputStream();
 		BufferedInputStream bufferedStream = new BufferedInputStream(inputStream);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		sshChannel.executeCommand("tail -123f " + logFile.getFileDestination());
 		appendToTextArea(bufferedStream, textArea);
 	}
