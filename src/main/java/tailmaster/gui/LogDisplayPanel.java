@@ -27,27 +27,7 @@ public class LogDisplayPanel extends JPanel {
         setPanelId(System.currentTimeMillis());
         TabRegistry.INSTANCE.addTab(getPanelId(), new TabData(panelId));
 
-        addComponentListener(new ComponentListener() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {
-            }
-
-            @Override
-            public void componentShown(ComponentEvent e) {
-                LogDisplayPanel panel = (LogDisplayPanel) e.getComponent();
-                boolean playing = TabRegistry.INSTANCE.getTabData(panel.getPanelId()).isPlaying();
-                TailMasterToolBar toolBar = (TailMasterToolBar) TailMasterFrame.getInstance().getToolBar();
-                toolBar.togglePauseButtonText(playing);
-            }
-
-            @Override
-            public void componentHidden(ComponentEvent e) {
-            }
-        });
+        addComponentListener(new PanelComponentListener());
 
         logTextArea = new JTextArea();
         logTextArea.setEditable(false);
@@ -103,4 +83,26 @@ public class LogDisplayPanel extends JPanel {
         public void mouseExited(MouseEvent e) {
         }
     }
+
+	private static class PanelComponentListener implements ComponentListener {
+		@Override
+            public void componentResized(ComponentEvent e) {
+		}
+
+		@Override
+            public void componentMoved(ComponentEvent e) {
+		}
+
+		@Override
+            public void componentShown(ComponentEvent e) {
+			LogDisplayPanel panel = (LogDisplayPanel) e.getComponent();
+			boolean playing = TabRegistry.INSTANCE.getTabData(panel.getPanelId()).isPlaying();
+			TailMasterToolBar toolBar = (TailMasterToolBar) TailMasterFrame.getInstance().getToolBar();
+			toolBar.togglePauseButtonText(playing);
+		}
+
+		@Override
+            public void componentHidden(ComponentEvent e) {
+		}
+	}
 }
