@@ -4,6 +4,7 @@ import tailmaster.model.Server;
 import tailmaster.model.LogFile;
 import tailmaster.command.TailCommand;
 import tailmaster.SessionRegistry;
+import tailmaster.util.SshUtils;
 import com.sshtools.j2ssh.SshClient;
 import com.sshtools.j2ssh.transport.IgnoreHostKeyVerification;
 import com.sshtools.j2ssh.connection.ChannelOutputStream;
@@ -44,15 +45,14 @@ public class RemoteTailCommand extends TailCommand {
 	}
 
 	public void executeCommand() throws IOException {
-		sshClient = connect();
+		sshClient = SshUtils.connect(server);
 
 		SessionChannelClient sshChannel = sshClient.openSessionChannel();
 //		ChannelEventListener listener = (ChannelEventListener) new SessionOutputReader(ssh);
 //		ssh.addEventListener(listener);
 		sshChannel.requestPseudoTerminal("vt100", 80, 24, 0, 0, ""); //VT100, VT220, VT320 and ANSI Emulations
 		//ssh.startShell();
-        SessionRegistry.put(connectionId, sshChannel);
-		SessionRegistry.put(connectionId, sshClient);
+        SessionRegistry.put(sshClient, sshChannel);
 		ChannelOutputStream out = sshChannel.getOutputStream();
 //		String cmd = "tail -f " + logFile.getFileDestination();
 //		out.write(cmd.getBytes());
@@ -62,27 +62,4 @@ public class RemoteTailCommand extends TailCommand {
 		sshChannel.executeCommand("tail -123f " + logFile.getFileDestination());
 		appendToTextArea(bufferedStream, textArea);
 	}
-
-    private SshClient connect() throws IOException {
-        sshClient = new SshClient();
-        //TODO catch "java.net.ConnectException: Connection timed out: connect"
-        //TODO catch "java.net.SocketException: Network is unreachable: connect"
-        sshClient.connect(server.getHostname(), new IgnoreHostKeyVerification());
-        PasswordAuthenticationClient auth = new PasswordAuthenticationClient();
-        auth.setUsername(server.getUsername());
-        auth.setPassword(server.getPassword());
-        int result = sshClient.authenticate(auth);
-        switch (result) {
-            case AuthenticationProtocolState.FAILED:
-                System.out.println("The authentication failed");
-                break;
-            case AuthenticationProtocolState.PARTIAL:
-                System.out.println("The authentication succeeded but another authentication is required");
-                break;
-            case AuthenticationProtocolState.COMPLETE:
-                System.out.println("The authentication is complete");
-                break;
-        }
-        return sshClient;
-    }
 }

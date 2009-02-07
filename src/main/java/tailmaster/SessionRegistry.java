@@ -12,26 +12,34 @@ import java.io.IOException;
  * Time: 9:06:07 PM
  */
 public class SessionRegistry {
-    private static HashMap<Long, SessionChannelClient> sshChannelMap = new HashMap<Long, SessionChannelClient>();
-    private static HashMap<Long, SshClient> connectionMap = new HashMap<Long, SshClient>();
+	private static HashMap<Long, SessionChannelClient> sshChannelMap = new HashMap<Long, SessionChannelClient>();
 
-    public static void put(long connectionId, SessionChannelClient ssh) {
-        sshChannelMap.put(connectionId, ssh);
+	private static HashMap<Long, SshClient> connectionMap = new HashMap<Long, SshClient>();
+
+	public static long put(SshClient client, SessionChannelClient channelClient) {
+		long now = System.currentTimeMillis();
+		put(now, client);
+		put(now, channelClient);
+		return now;
+	}
+
+	private static void put(long connectionId, SessionChannelClient channelClient) {
+        sshChannelMap.put(connectionId, channelClient);
     }
 
-    public static HashMap<Long, SessionChannelClient> getSshChannelMap() {
+	private static HashMap<Long, SessionChannelClient> getSshChannelMap() {
         return sshChannelMap;
     }
 
-    public static void put(long connectionId, SshClient sshClient) {
-        connectionMap.put(connectionId, sshClient);
+	public static void put(long connectionId, SshClient client) {
+        connectionMap.put(connectionId, client);
     }
 
-    public static HashMap<Long, SshClient> getConnectionMap() {
+	public static HashMap<Long, SshClient> getConnectionMap() {
         return connectionMap;
     }
 
-    public static void disconnect(long connectionId) {
+	public static void disconnect(long connectionId) {
         SessionChannelClient sessionChannel = sshChannelMap.get(connectionId);
         SshClient connection = connectionMap.get(connectionId);
         try {
