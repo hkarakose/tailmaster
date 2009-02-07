@@ -5,6 +5,7 @@ import tailmaster.gui.configuration.ConfigurationTableModel;
 import tailmaster.dao.LogFileDao;
 import tailmaster.model.LogFile;
 import tailmaster.model.LocationType;
+import tailmaster.model.Server;
 import tailmaster.util.JTableUtils;
 import tailmaster.util.JComboBoxUtils;
 
@@ -47,7 +48,9 @@ public class AddLogFileConfigurationListener implements ActionListener {
 
 	private int findServerId(LocationType locationType) {
 		if (locationType == LocationType.REMOTE) {
-			 return JComboBoxUtils.getSelectedServerId(logFileConfigurationForm.getServerIdComboBox());
+            JComboBox serverComboBox = logFileConfigurationForm.getServerIdComboBox();
+            Server server = (Server) serverComboBox.getSelectedItem();
+            return server.getId();
 		} else {
 			return 0; //the file is in the local computer, there is no need for a server info.
 		}
