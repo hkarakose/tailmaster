@@ -32,18 +32,18 @@ public class DisplayLogFileListener implements ActionListener {
 		TailMasterFrame gui = TailMasterFrame.getInstance();
 		CloseButtonTabbedPane tabbedPane = gui.getTabbedPane();
 
-		LogDisplayPanel slcmJbossTab = new LogDisplayPanel();
+		LogDisplayPanel logDisplayPanel = new LogDisplayPanel();
 		if (LocationType.REMOTE.getLocationTypeId() == logFile.getLocationType()) {
             long connectionId = System.currentTimeMillis();
-			tabbedPane.addTab(connectionId, logFile.getAlias(), null, slcmJbossTab, server.getHostname());
-			tabbedPane.setSelectedComponent(slcmJbossTab);
-			RemoteTailCommand command = new RemoteTailCommand(connectionId, server, logFile, slcmJbossTab.getLogTextArea());
+			tabbedPane.addTab(connectionId, logFile.getAlias(), null, logDisplayPanel, server.getHostname());
+			tabbedPane.setSelectedComponent(logDisplayPanel);
+			RemoteTailCommand command = new RemoteTailCommand(connectionId, server, logFile, logDisplayPanel.getLogTextArea());
 			TailExecutor tailExecutor = new TailExecutor(command);
 			tailExecutor.start();
 		} else {
-			tabbedPane.addTab(logFile.getAlias(), null, slcmJbossTab, logFile.getFileDestination());
-			tabbedPane.setSelectedComponent(slcmJbossTab);
-			LocalTailCommand localTailCommand = new LocalTailCommand(logFile, slcmJbossTab.getLogTextArea());
+			tabbedPane.addTab(logFile.getAlias(), null, logDisplayPanel, logFile.getFileDestination());
+			tabbedPane.setSelectedComponent(logDisplayPanel);
+			LocalTailCommand localTailCommand = new LocalTailCommand(logFile, logDisplayPanel.getLogTextArea());
 			TailExecutor tailExecutor = new TailExecutor(localTailCommand);
 			tailExecutor.start();
 		}
