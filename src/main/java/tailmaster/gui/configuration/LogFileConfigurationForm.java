@@ -1,14 +1,15 @@
 package tailmaster.gui.configuration;
 
-import tailmaster.util.JComboBoxUtils;
 import tailmaster.model.LocationType;
+import tailmaster.model.Server;
+import tailmaster.dao.ServerDao;
+import tailmaster.gui.ServerComboBoxRenderer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * User: Halil KARAKOSE
@@ -38,8 +39,9 @@ public class LogFileConfigurationForm extends JPanel {
 		locationLabel = new JLabel();
 		locationComboBox = getLocationTypeComboBoxItems();
 		serverIdLabel = new JLabel();
-		String[] servers = JComboBoxUtils.getServerArray();
-		serverIdComboBox = new JComboBox(servers);
+        ArrayList<Server> serversList = ServerDao.getInstance().findAllSortedByServerName();
+        serverIdComboBox = new JComboBox(serversList.toArray());
+        serverIdComboBox.setRenderer(new ServerComboBoxRenderer());
 		filePathLabel = new JLabel();
 		filePathTextField = new JTextField();
 

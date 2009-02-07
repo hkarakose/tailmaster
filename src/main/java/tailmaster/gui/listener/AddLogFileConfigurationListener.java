@@ -7,7 +7,6 @@ import tailmaster.model.LogFile;
 import tailmaster.model.LocationType;
 import tailmaster.model.Server;
 import tailmaster.util.JTableUtils;
-import tailmaster.util.JComboBoxUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
