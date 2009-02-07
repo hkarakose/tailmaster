@@ -6,10 +6,7 @@ import tailmaster.model.TabData;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 
 /**
  * User: Halil KARAKOSE
@@ -58,7 +55,7 @@ public class LogDisplayPanel extends JPanel {
         this.panelId = panelId;
     }
 
-    private static class LogTextAreaMouseMotionListener implements MouseListener {
+    private static class LogTextAreaMouseMotionListener extends MouseAdapter {
 
         public void mouseMoved(MouseEvent e) {
             //http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Cursor.html
@@ -66,14 +63,6 @@ public class LogDisplayPanel extends JPanel {
             //http://java.sun.com/javase/6/docs/api/java/awt/event/MouseListener.html#mouseEntered(java.awt.event.MouseEvent)
         }
 
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        public void mousePressed(MouseEvent e) {
-        }
-
-        public void mouseReleased(MouseEvent e) {
-        }
 
         public void mouseEntered(MouseEvent e) {
             JTextArea textArea = (JTextArea) e.getComponent();
