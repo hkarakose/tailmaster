@@ -101,16 +101,6 @@ public class LogFileConfigurationForm extends JPanel {
 		gridBagConstraints.weightx = 1.0;
 		gridBagConstraints.insets = new Insets(2, 2, 2, 2);
 		add(filePathTextField, gridBagConstraints);
-		filePathTextField.addKeyListener(new KeyListener() {
-			public void keyTyped(KeyEvent e) {
-			}
-
-			public void keyPressed(KeyEvent e) {
-			}
-
-			public void keyReleased(KeyEvent e) {
-			}
-		});
 	}
 
 	private JComboBox getLocationTypeComboBoxItems() {
