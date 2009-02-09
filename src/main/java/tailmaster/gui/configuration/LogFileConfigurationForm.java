@@ -26,8 +26,16 @@ public class LogFileConfigurationForm extends JPanel {
 	private JLabel filePathLabel;
 	private JTextField filePathTextField;
 
+    private static LogFileConfigurationForm instance;
+    private int logId;
 
-	public LogFileConfigurationForm() {
+
+    public static LogFileConfigurationForm getInstance() {
+        if (instance == null) instance = new LogFileConfigurationForm();
+        return instance;
+    }
+
+	private LogFileConfigurationForm() {
 		initComponents();
 	}
 
@@ -143,4 +151,12 @@ public class LogFileConfigurationForm extends JPanel {
 	public JTextField getFilePathTextField() {
 		return filePathTextField;
 	}
+
+    public int getLogId() {
+        return logId;
+    }
+
+    public void setLogId(int logId) {
+        this.logId = logId;
+    }
 }

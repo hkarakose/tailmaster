@@ -13,7 +13,7 @@ public class Server {
     private String password;
 
     public Server(int id, String serverAlias, String hostname, String username, String password) {
-        this(serverAlias, hostname,username,password);
+        this(serverAlias, hostname, username, password);
         this.id = id;
     }
 
@@ -42,5 +42,18 @@ public class Server {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof Server)) {
+            return false;
+        }
+        Server serverObj = (Server) obj;
+        if ( !(getServerAlias().equals(serverObj.getServerAlias())) ) return false;
+        if ( !(getHostname().equals(serverObj.getHostname())) ) return false;
+        if ( !(getUsername().equals(serverObj.getUsername())) ) return false;
+
+        return getPassword().equals(serverObj.getPassword());
     }
 }

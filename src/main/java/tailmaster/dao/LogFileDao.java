@@ -45,26 +45,34 @@ public class LogFileDao extends AbstractDao {
     }
 
 
-    public LogFile findById(int id) throws SQLException {
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM LOGFILE WHERE ID = " + id);
-        if (rs.next()) {
-            return new LogFile(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
+    public LogFile findById(int id) {
+        try {
+            Statement stmt = null;
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM LOGFILE WHERE ID = " + id);
+            if (rs.next()) {
+                return new LogFile(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
+        
         return null;
     }
 
-    public int update(LogFile server, int id) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("UPDATE LOGFILE SET SERVERID=?, ALIAS=?, FILEDESTINATION=? WHERE ID=?");
-
-        int i = 1;
-        statement.setInt(i++, server.getServerId());
-        statement.setString(i++, server.getAlias());
-        statement.setString(i++, server.getFileDestination());
-        statement.setInt(i, id);
-
-        return statement.executeUpdate();
+    public int update(LogFile server, int id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE LOGFILE SET SERVERID=?, ALIAS=?, FILEDESTINATION=? WHERE ID=?");
+            int i = 1;
+            statement.setInt(i++, server.getServerId());
+            statement.setString(i++, server.getAlias());
+            statement.setString(i++, server.getFileDestination());
+            statement.setInt(i, id);
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public int delete(int id) throws SQLException {
