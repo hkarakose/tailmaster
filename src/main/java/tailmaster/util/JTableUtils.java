@@ -19,7 +19,7 @@ public class JTableUtils {
         Object[][] objects = new Object[list.size()][5];
         for (int i = 0; i < list.size(); i++) {
             Server server = list.get(i);
-            objects[i] = new String[]{String.valueOf(i + 1), server.getServerAlias(), server.getHostname(), server.getUsername(), server.getPassword()};
+            objects[i] = new String[]{String.valueOf(server.getId()), server.getServerAlias(), server.getHostname(), server.getUsername(), server.getPassword()};
         }
         return objects;
     }
@@ -29,7 +29,7 @@ public class JTableUtils {
     }
 
     public static String[] getServerColumnHeaders() {
-        return new String[]{"Id", "Server Alias", "Host / IP", "Username", "Password"};
+        return new String[]{"Server Id", "Server Alias", "Host / IP", "Username", "Password"};
     }
 
     public static Object[][] getLogFileList() {
@@ -40,7 +40,7 @@ public class JTableUtils {
             LogFile logFile = list.get(i);
             Server server = ServerDao.getInstance().findById(logFile.getServerId());
             String serverName = (server == null) ? "LOCAL" : server.getServerAlias() + " (" + server.getHostname() + ")";
-            objects[i] = new String[]{String.valueOf(i + 1), logFile.getAlias(), serverName, logFile.getFileDestination()};
+            objects[i] = new String[]{String.valueOf(logFile.getId()), logFile.getAlias(), serverName, logFile.getFileDestination()};
         }
         return objects;
     }
@@ -50,7 +50,6 @@ public class JTableUtils {
     }
 
     public static String[] getLogFileColumnHeaders() {
-        String[] columnList = {"Id", "Log File Alias", "Server", "File Path"};
-        return columnList;
+        return new String[]{"Log Id", "Log File Alias", "Server", "File Path"};
     }
 }
