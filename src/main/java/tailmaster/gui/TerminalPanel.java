@@ -9,6 +9,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.io.*;
 
+import tailmaster.sshterm.EscapeCharacterManager;
+
 /**
  * User: Halil KARAKOSE
  * Date: Feb 6, 2009
@@ -17,9 +19,11 @@ import java.io.*;
 public class TerminalPanel extends LogDisplayPanel {
 	private ChannelOutputStream outputStream;
 	private ChannelInputStream inputStream;
+    private EscapeCharacterManager escapeCharacterManager;
 
 	public TerminalPanel(SessionChannelClient channel) {
 		super();
+        this.escapeCharacterManager = new EscapeCharacterManager();
 		this.outputStream = channel.getOutputStream();
 
 		this.inputStream = channel.getInputStream();
@@ -33,8 +37,11 @@ public class TerminalPanel extends LogDisplayPanel {
 				try {
 					while (true) {
 						if ((charCode = (char) inputStream.read()) != -1) {
-							textArea.append(String.valueOf(charCode));
-							textArea.setCaretPosition(textArea.getText().length());
+                            System.out.println((short) charCode + "-" + charCode);
+                            if (escapeCharacterManager.canWrite(charCode)) {
+                                textArea.append(String.valueOf(charCode));
+                                textArea.setCaretPosition(textArea.getText().length());
+                            }
 						} else {
 							Thread.sleep(2000);
 						}
