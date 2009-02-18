@@ -17,8 +17,7 @@ import java.util.logging.SimpleFormatter;
  * Time: 4:27:53 PM
  */
 public class TailMaster {
-
-
+    
 	public static void main(String args[]) throws IOException, SQLException {
 		ConfigurationManager.init();
 
@@ -28,7 +27,22 @@ public class TailMaster {
 		fh.setFormatter(new SimpleFormatter());
 		logger.addHandler(fh);
 
-		JFrame gui = TailMasterFrame.getInstance();
+        setSystemLookAndFeel();
+        JFrame gui = TailMasterFrame.getInstance();
 		gui.setVisible(true);
 	}
+
+    private static void setSystemLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+    }
 }
