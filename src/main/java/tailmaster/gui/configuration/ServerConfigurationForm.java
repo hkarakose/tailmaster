@@ -18,11 +18,19 @@ public class ServerConfigurationForm extends JPanel {
     private JLabel usernameLabel;
     private JTextField usernameTextField;
 
-    public ServerConfigurationForm() {
+    private static ServerConfigurationForm instance;
+    private int serverId;
+
+    private ServerConfigurationForm() {
         initComponents();
     }
 
-	private void initComponents() {
+    public static ServerConfigurationForm getInstance() {
+        if (instance == null) instance = new ServerConfigurationForm();
+        return instance;
+    }
+
+    private void initComponents() {
         GridBagConstraints gridBagConstraints;
 
         aliasLabel = new JLabel();
@@ -124,15 +132,39 @@ public class ServerConfigurationForm extends JPanel {
         return aliasTextField;
     }
 
+    public void setAliasTextField(JTextField aliasTextField) {
+        this.aliasTextField = aliasTextField;
+    }
+
     public JTextField getHostTextField() {
         return hostTextField;
+    }
+
+    public void setHostTextField(JTextField hostTextField) {
+        this.hostTextField = hostTextField;
     }
 
     public JTextField getPasswordTextField() {
         return passwordTextField;
     }
 
+    public void setPasswordTextField(JTextField passwordTextField) {
+        this.passwordTextField = passwordTextField;
+    }
+
     public JTextField getUsernameTextField() {
         return usernameTextField;
+    }
+
+    public void setUsernameTextField(JTextField usernameTextField) {
+        this.usernameTextField = usernameTextField;
+    }
+
+    public int getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(int serverId) {
+        this.serverId = serverId;
     }
 }

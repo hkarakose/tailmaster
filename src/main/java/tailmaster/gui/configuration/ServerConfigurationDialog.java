@@ -4,6 +4,11 @@ import tailmaster.gui.listener.AddServerConfigurationListener;
 import tailmaster.gui.listener.DeleteServerConfigurationListener;
 import tailmaster.util.JTableUtils;
 import tailmaster.commons.gui.ClosableJDialog;
+import tailmaster.model.Server;
+import tailmaster.model.LocationType;
+import tailmaster.model.LogFile;
+import tailmaster.dao.LogFileDao;
+import tailmaster.dao.ServerDao;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -34,7 +39,7 @@ public class ServerConfigurationDialog extends ClosableJDialog {
 
         serverTablePanel = new ServerTablePanel(JTableUtils.getServerList());
 
-        serverConfigurationForm = new ServerConfigurationForm();
+        serverConfigurationForm = ServerConfigurationForm.getInstance();
         buttonPanel = new JPanel();
         saveButton = new JButton();
         updateButton = new JButton();
@@ -61,11 +66,7 @@ public class ServerConfigurationDialog extends ClosableJDialog {
         buttonPanel.add(saveButton);
 
         updateButton.setText("Update");
-				updateButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Not implemented.", "Warning", JOptionPane.WARNING_MESSAGE);
-			}
-		});
+        updateButton.addActionListener(new UpdateServerConfigurationListener(serverTablePanel.getServerTable()));
         buttonPanel.add(updateButton);
 
         deleteButton.setText("Delete");
@@ -78,5 +79,31 @@ public class ServerConfigurationDialog extends ClosableJDialog {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(buttonPanel, gridBagConstraints);
+    }
+
+    private class UpdateServerConfigurationListener implements ActionListener {
+        private JTable table;
+
+        public UpdateServerConfigurationListener(JTable serverTable) {
+            this.table = serverTable;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            ServerConfigurationForm configurationForm = ServerConfigurationForm.getInstance();
+            int serverId = configurationForm.getServerId();
+            if (serverId == 0) {
+                return;
+            }
+
+            String serverName = configurationForm.getAliasTextField().getText();
+            String host = configurationForm.getHostTextField().getText();
+            String username = configurationForm.getUsernameTextField().getText();
+            String password = configurationForm.getPasswordTextField().getText();
+
+            ServerDao.getInstance().update(new Server(serverId, serverName, host, username, password));
+            ConfigurationTableModel tableModel = (ConfigurationTableModel) table.getModel();
+            tableModel.setDataVector(JTableUtils.getServerList(), JTableUtils.getServerColumnHeaders());
+            JOptionPane.showMessageDialog(null, "Update Successfull", "Success", JOptionPane.WARNING_MESSAGE);
+        }
     }
 }

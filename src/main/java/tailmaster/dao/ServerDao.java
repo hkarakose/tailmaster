@@ -71,17 +71,23 @@ public class ServerDao extends AbstractDao {
 		return null;
 	}
 
-    public int update(Server server, int id) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("UPDATE SERVER SET ALIAS=?, HOST=?, USERNAME=?, PASSWORD=? WHERE ID=?");
+    public int update(Server server) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement("UPDATE SERVER SET SERVERALIAS=?, HOST=?, USERNAME=?, PASSWORD=? WHERE ID=?");
+            int i = 1;
+            statement.setString(i++, server.getServerAlias());
+            statement.setString(i++, server.getHostname());
+            statement.setString(i++, server.getUsername());
+            statement.setString(i++, server.getPassword());
+            statement.setInt(i, server.getId());
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Unable to update server information with id=" + server.getId(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-        int i = 1;
-        statement.setString(i++, server.getServerAlias());
-        statement.setString(i++, server.getHostname());
-        statement.setString(i++, server.getUsername());
-        statement.setString(i++, server.getPassword());
-        statement.setInt(i, id);
-
-        return statement.executeUpdate();
+        return 0;
     }
 
     public int delete(int id) throws SQLException {
