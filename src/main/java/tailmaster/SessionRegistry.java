@@ -17,10 +17,13 @@ public class SessionRegistry {
 	private static HashMap<Long, SshClient> connectionMap = new HashMap<Long, SshClient>();
 
 	public static long put(SshClient client, SessionChannelClient channelClient) {
-		long now = System.currentTimeMillis();
-		put(now, client);
-		put(now, channelClient);
-		return now;
+		return put(client, channelClient, System.currentTimeMillis());
+	}
+
+	public static long put(SshClient client, SessionChannelClient channelClient, long connectionId) {
+		put(connectionId, client);
+		put(connectionId, channelClient);
+		return connectionId;
 	}
 
 	private static void put(long connectionId, SessionChannelClient channelClient) {

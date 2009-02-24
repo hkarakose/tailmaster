@@ -33,19 +33,20 @@ public class DisplayLogFileListener implements ActionListener {
 		CloseButtonTabbedPane tabbedPane = gui.getTabbedPane();
 
 		LogDisplayPanel logDisplayPanel = new LogDisplayPanel();
+		TailExecutor tailExecutor;
 		if (LocationType.REMOTE.getLocationTypeId() == logFile.getLocationType()) {
             long connectionId = System.currentTimeMillis();
 			tabbedPane.addTab(connectionId, logFile.getAlias(), null, logDisplayPanel, server.getHostname());
 			tabbedPane.setSelectedComponent(logDisplayPanel);
 			RemoteTailCommand command = new RemoteTailCommand(connectionId, server, logFile, logDisplayPanel.getLogTextArea());
-			TailExecutor tailExecutor = new TailExecutor(command);
-			tailExecutor.start();
+			tailExecutor = new TailExecutor(command);
 		} else {
 			tabbedPane.addTab(logFile.getAlias(), null, logDisplayPanel, logFile.getFileDestination());
 			tabbedPane.setSelectedComponent(logDisplayPanel);
 			LocalTailCommand localTailCommand = new LocalTailCommand(logFile, logDisplayPanel.getLogTextArea());
-			TailExecutor tailExecutor = new TailExecutor(localTailCommand);
-			tailExecutor.start();
+			tailExecutor = new TailExecutor(localTailCommand);
 		}
+
+		tailExecutor.start();
 	}
 }
