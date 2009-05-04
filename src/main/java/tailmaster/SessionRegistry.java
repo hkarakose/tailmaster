@@ -16,26 +16,21 @@ public class SessionRegistry {
 
 	private static HashMap<Long, SshClient> connectionMap = new HashMap<Long, SshClient>();
 
-	public static long put(SshClient client, SessionChannelClient channelClient) {
-		return put(client, channelClient, System.currentTimeMillis());
-	}
-
-	public static long put(SshClient client, SessionChannelClient channelClient, long connectionId) {
+	public static void put(long connectionId, SshClient client, SessionChannelClient channelClient) {
 		put(connectionId, client);
 		put(connectionId, channelClient);
-		return connectionId;
 	}
 
 	private static void put(long connectionId, SessionChannelClient channelClient) {
         sshChannelMap.put(connectionId, channelClient);
     }
 
+	private static void put(long connectionId, SshClient client) {
+		connectionMap.put(connectionId, client);
+	}
+
 	private static HashMap<Long, SessionChannelClient> getSshChannelMap() {
         return sshChannelMap;
-    }
-
-	public static void put(long connectionId, SshClient client) {
-        connectionMap.put(connectionId, client);
     }
 
 	public static HashMap<Long, SshClient> getConnectionMap() {
