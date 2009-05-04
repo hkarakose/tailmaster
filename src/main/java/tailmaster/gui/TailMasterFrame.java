@@ -1,11 +1,10 @@
 package tailmaster.gui;
 
-import tailmaster.gui.menu.TailMasterMenuBar;
 import tailmaster.commons.gui.CloseButtonTabbedPane;
+import tailmaster.gui.menu.TailMasterMenuBar;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * User: Halil KARAKOSE

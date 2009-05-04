@@ -1,10 +1,10 @@
 package tailmaster;
 
-import com.sshtools.j2ssh.session.SessionChannelClient;
 import com.sshtools.j2ssh.SshClient;
+import com.sshtools.j2ssh.session.SessionChannelClient;
 
-import java.util.*;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * User: Halil KARAKOSE

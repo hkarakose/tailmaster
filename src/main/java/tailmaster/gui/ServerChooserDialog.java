@@ -1,18 +1,17 @@
 package tailmaster.gui;
 
-import tailmaster.model.Server;
-import tailmaster.dao.ServerDao;
-import tailmaster.util.SshUtils;
-import tailmaster.SessionRegistry;
-import tailmaster.commons.gui.CloseButtonTabbedPane;
-
-import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
 import com.sshtools.j2ssh.SshClient;
 import com.sshtools.j2ssh.session.SessionChannelClient;
+import tailmaster.SessionRegistry;
+import tailmaster.commons.gui.CloseButtonTabbedPane;
+import tailmaster.dao.ServerDao;
+import tailmaster.model.Server;
+import tailmaster.util.SshUtils;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * User: Halil KARAKOSE

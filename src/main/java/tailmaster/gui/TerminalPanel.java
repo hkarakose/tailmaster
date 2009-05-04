@@ -1,16 +1,14 @@
 package tailmaster.gui;
 
-import com.sshtools.j2ssh.session.SessionChannelClient;
-import com.sshtools.j2ssh.connection.ChannelOutputStream;
 import com.sshtools.j2ssh.connection.ChannelInputStream;
-
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
-import java.io.*;
-
-import tailmaster.sshterm.EscapeCharacterManager;
+import com.sshtools.j2ssh.connection.ChannelOutputStream;
+import com.sshtools.j2ssh.session.SessionChannelClient;
 import tailmaster.commons.gui.BlockCaret;
+import tailmaster.sshterm.EscapeCharacterManager;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 /**
  * User: Halil KARAKOSE

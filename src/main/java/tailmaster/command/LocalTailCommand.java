@@ -1,10 +1,11 @@
 package tailmaster.command;
 
 import tailmaster.model.LogFile;
-import tailmaster.command.TailCommand;
 
 import javax.swing.*;
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * User: Halil KARAKOSE

@@ -1,18 +1,18 @@
 package tailmaster.gui.listener;
 
-import tailmaster.model.LogFile;
-import tailmaster.model.Server;
-import tailmaster.model.LocationType;
-import tailmaster.dao.ServerDao;
-import tailmaster.gui.TailMasterFrame;
-import tailmaster.gui.LogDisplayPanel;
-import tailmaster.commons.gui.CloseButtonTabbedPane;
-import tailmaster.command.RemoteTailCommand;
 import tailmaster.TailExecutor;
 import tailmaster.command.LocalTailCommand;
+import tailmaster.command.RemoteTailCommand;
+import tailmaster.commons.gui.CloseButtonTabbedPane;
+import tailmaster.dao.ServerDao;
+import tailmaster.gui.LogDisplayPanel;
+import tailmaster.gui.TailMasterFrame;
+import tailmaster.model.LocationType;
+import tailmaster.model.LogFile;
+import tailmaster.model.Server;
 
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * User: Halil KARAKOSE

@@ -1,21 +1,17 @@
 package tailmaster.command;
 
-import tailmaster.model.Server;
-import tailmaster.model.LogFile;
-import tailmaster.command.TailCommand;
-import tailmaster.SessionRegistry;
-import tailmaster.util.SshUtils;
 import com.sshtools.j2ssh.SshClient;
-import com.sshtools.j2ssh.transport.IgnoreHostKeyVerification;
-import com.sshtools.j2ssh.connection.ChannelOutputStream;
 import com.sshtools.j2ssh.connection.ChannelInputStream;
+import com.sshtools.j2ssh.connection.ChannelOutputStream;
 import com.sshtools.j2ssh.session.SessionChannelClient;
-import com.sshtools.j2ssh.authentication.PasswordAuthenticationClient;
-import com.sshtools.j2ssh.authentication.AuthenticationProtocolState;
+import tailmaster.SessionRegistry;
+import tailmaster.model.LogFile;
+import tailmaster.model.Server;
+import tailmaster.util.SshUtils;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.io.BufferedInputStream;
+import java.io.IOException;
 
 /**
  * User: Halil KARAKOSE

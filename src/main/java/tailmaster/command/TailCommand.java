@@ -1,14 +1,13 @@
 package tailmaster.command;
 
-import tailmaster.command.Command;
-import tailmaster.gui.LogDisplayPanel;
-import tailmaster.TabRegistry;
 import tailmaster.SessionRegistry;
+import tailmaster.TabRegistry;
+import tailmaster.gui.LogDisplayPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.awt.*;
 
 /**
  * User: Halil KARAKOSE

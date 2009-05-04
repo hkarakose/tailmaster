@@ -1,13 +1,13 @@
 package tailmaster.gui;
 
-import tailmaster.model.TabData;
 import tailmaster.TabRegistry;
 import tailmaster.commons.gui.CloseButtonTabbedPane;
+import tailmaster.model.TabData;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * User: Halil KARAKOSE
