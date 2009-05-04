@@ -99,7 +99,8 @@ public class ServerChooserDialog extends javax.swing.JDialog {
 
             TerminalPanel terminalPanel = new TerminalPanel(channel);
 
-            long connectionId = SessionRegistry.put(client, channel);
+			long connectionId = System.currentTimeMillis();
+            SessionRegistry.put(connectionId, client, channel);
             CloseButtonTabbedPane tabbedPane = gui.getTabbedPane();
             tabbedPane.addTab(connectionId, "Ssh Client", null, terminalPanel, terminalPanel.getToolTipText());
             serverComboBox.getRootPane().getParent().setVisible(false);
