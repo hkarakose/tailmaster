@@ -1,18 +1,18 @@
 package tailmaster.gui.menu;
 
-import tailmaster.gui.configuration.ServerConfigurationDialog;
-import tailmaster.gui.configuration.LogFileConfigurationDialog;
-import tailmaster.gui.listener.DisplayLogFileListener;
+import tailmaster.dao.LogFileDao;
 import tailmaster.gui.ServerChooserDialog;
 import tailmaster.gui.TailMasterFrame;
-import tailmaster.dao.LogFileDao;
+import tailmaster.gui.configuration.LogFileConfigurationDialog;
+import tailmaster.gui.configuration.ServerConfigurationDialog;
+import tailmaster.gui.listener.DisplayLogFileListener;
 import tailmaster.model.LogFile;
 
 import javax.swing.*;
-import javax.swing.event.MenuListener;
 import javax.swing.event.MenuEvent;
-import java.awt.event.ActionListener;
+import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**

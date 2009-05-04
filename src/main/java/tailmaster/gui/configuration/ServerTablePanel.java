@@ -1,11 +1,10 @@
 package tailmaster.gui.configuration;
 
-import tailmaster.gui.configuration.ConfigurationTable;
 import tailmaster.util.JTableUtils;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * User: Halil KARAKOSE

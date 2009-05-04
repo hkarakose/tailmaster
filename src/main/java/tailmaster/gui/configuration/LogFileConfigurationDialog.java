@@ -1,18 +1,18 @@
 package tailmaster.gui.configuration;
 
-import tailmaster.util.JTableUtils;
+import tailmaster.commons.gui.ClosableJDialog;
+import tailmaster.dao.LogFileDao;
 import tailmaster.gui.listener.AddLogFileConfigurationListener;
 import tailmaster.gui.listener.DeleteLogFileConfigurationListener;
-import tailmaster.commons.gui.ClosableJDialog;
 import tailmaster.model.LocationType;
-import tailmaster.model.Server;
 import tailmaster.model.LogFile;
-import tailmaster.dao.LogFileDao;
+import tailmaster.model.Server;
+import tailmaster.util.JTableUtils;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * User: Halil KARAKOSE

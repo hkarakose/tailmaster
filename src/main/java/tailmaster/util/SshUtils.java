@@ -1,16 +1,15 @@
 package tailmaster.util;
 
 import com.sshtools.j2ssh.SshClient;
-import com.sshtools.j2ssh.session.SessionChannelClient;
-import com.sshtools.j2ssh.session.PseudoTerminal;
-import com.sshtools.j2ssh.authentication.PasswordAuthenticationClient;
 import com.sshtools.j2ssh.authentication.AuthenticationProtocolState;
+import com.sshtools.j2ssh.authentication.PasswordAuthenticationClient;
+import com.sshtools.j2ssh.session.PseudoTerminal;
+import com.sshtools.j2ssh.session.SessionChannelClient;
 import com.sshtools.j2ssh.transport.IgnoreHostKeyVerification;
-
-import java.io.IOException;
-
 import tailmaster.model.Server;
 import tailmaster.sshterm.PseudoTerminalImpl;
+
+import java.io.IOException;
 
 /**
  * User: Halil KARAKOSE

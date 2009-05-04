@@ -1,14 +1,14 @@
 package tailmaster.gui.configuration;
 
-import tailmaster.model.LocationType;
-import tailmaster.model.Server;
 import tailmaster.dao.ServerDao;
 import tailmaster.gui.ServerComboBoxRenderer;
+import tailmaster.model.LocationType;
+import tailmaster.model.Server;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 /**

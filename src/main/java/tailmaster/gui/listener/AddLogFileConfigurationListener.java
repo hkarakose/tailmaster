@@ -1,16 +1,16 @@
 package tailmaster.gui.listener;
 
-import tailmaster.gui.configuration.LogFileConfigurationForm;
-import tailmaster.gui.configuration.ConfigurationTableModel;
 import tailmaster.dao.LogFileDao;
-import tailmaster.model.LogFile;
+import tailmaster.gui.configuration.ConfigurationTableModel;
+import tailmaster.gui.configuration.LogFileConfigurationForm;
 import tailmaster.model.LocationType;
+import tailmaster.model.LogFile;
 import tailmaster.model.Server;
 import tailmaster.util.JTableUtils;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 /**

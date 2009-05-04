@@ -1,14 +1,14 @@
 package tailmaster.gui.listener;
 
 import tailmaster.dao.ServerDao;
-import tailmaster.model.Server;
 import tailmaster.gui.configuration.ServerConfigurationForm;
+import tailmaster.model.Server;
 import tailmaster.util.JTableUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 /**

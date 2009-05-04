@@ -2,12 +2,14 @@ package tailmaster.commons.gui;
 
 import tailmaster.SessionRegistry;
 import tailmaster.TabRegistry;
-import tailmaster.gui.LogDisplayPanel;
+import tailmaster.gui.TailMasterPanel;
 
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalIconFactory;
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
@@ -17,6 +19,14 @@ import java.awt.event.MouseEvent;
  */
 public class CloseButtonTabbedPane extends JTabbedPane {
     public CloseButtonTabbedPane() {
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyChar() == '') { // ctrl-w - close tab
+                    System.out.println("close tab");
+                }
+            }
+        });
     }
 
     @Override
@@ -56,22 +66,22 @@ public class CloseButtonTabbedPane extends JTabbedPane {
             JButton button = new JButton(MetalIconFactory.getInternalFrameCloseIcon(16));
             button.setMargin(new Insets(0, 0, 0, 0));
             button.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
-            button.addMouseListener(new MouseListener() {
+            button.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
-                    SessionRegistry.disconnect(connectionId);
                     JButton button = (JButton) e.getSource();
-                    CloseButtonTab buttonTab = (CloseButtonTab) button.getParent();
-                    LogDisplayPanel panel = (LogDisplayPanel) buttonTab.getTab();
-                    TabRegistry.INSTANCE.removeTab(panel.getPanelId());
-                    JTabbedPane tabbedPane = (JTabbedPane) panel.getParent();
-                    tabbedPane.remove(panel);
-                }
+					CloseButtonTab buttonTab = (CloseButtonTab) button.getParent();
+					TailMasterPanel panel = (TailMasterPanel) buttonTab.getTab();
+					TabRegistry.INSTANCE.removeTab(panel.getPanelId());
+					JTabbedPane tabbedPane = (JTabbedPane) panel.getParent();
+					tabbedPane.remove(panel);
 
-                public void mousePressed(MouseEvent e) {
-                }
+					if (connectionId > 0) {
+						SessionRegistry.disconnect(connectionId);
+					} else {
+						System.out.println("connectionId = " + connectionId);
+					}
 
-                public void mouseReleased(MouseEvent e) {
-                }
+				}
 
                 public void mouseEntered(MouseEvent e) {
                     JButton button = (JButton) e.getSource();

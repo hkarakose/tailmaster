@@ -1,13 +1,9 @@
 package tailmaster.commons.gui;
 
-import java.awt.*;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
+import java.awt.*;
 
 public class BlockCaret extends DefaultCaret {
 
