@@ -1,0 +1,3 @@
+# TailMaster #
+
+TailMaster is a java-based application which assists you in development and test stages. It helps you watch your log files easily. TailMaster uses SSH protocol to access log files. The connection information of the server and the path of the log files which you want to watch is required by TailMaster, to access the files. After connection is established to the server, TailMaster automatically executes tail command for the log files and displays the output.
